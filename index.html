@@ -137,188 +137,108 @@
       margin-right: 8px;
     }
 
-    /* ========== صفحة المشاهدة - تصميم جديد بالكامل ========== */
+    /* ستايل صفحة المشاهدة بالاعلانات */
     .viewer-page {
-      background: #000000 !important;
+      background: #0a0710;
       min-height: 100vh;
       width: 100%;
       position: relative;
-      padding: 0 !important;
-      margin: 0 !important;
     }
     
-    /* شريط الكاميرا - خلفية سوداء ونص أبيض */
     .camera-request {
-      background: #000000;
-      color: #ffffff !important;
-      padding: 18px 20px;
+      background: linear-gradient(90deg, #6e3be0, #a66bff);
+      color: white;
+      padding: 15px 20px;
       text-align: center;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: bold;
-      border-bottom: 3px solid #ffffff;
-      width: 100%;
-      box-sizing: border-box;
-      margin: 0;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+      border-radius: 0;
+      margin-bottom: 10px;
+      border-bottom: 3px solid #ffd966;
+      box-shadow: 0 4px 20px rgba(166,107,255,0.5);
+      z-index: 10000;
+      position: relative;
     }
     
     .camera-request i {
       margin-left: 10px;
       font-size: 24px;
-      color: #ffffff;
     }
     
-    /* الإعلانات - خلفية سوداء بالكامل */
-    .ads-master-container {
-      background: #000000;
-      width: 100%;
-      padding: 20px 15px;
-      box-sizing: border-box;
-    }
-    
-    /* حاوية الإعلانات - تصميم مكتظ بالإعلانات */
-    .ads-wall {
+    .ads-container {
       display: flex;
       flex-direction: column;
-      gap: 15px;
-      background: #000000;
+      gap: 20px;
+      padding: 15px;
+      background: #0a0710;
     }
     
     .ad-block {
       width: 100%;
-      background: #0a0a0a;
-      border: 1px solid #333333;
+      background: #131026;
+      border-radius: 12px;
       padding: 15px;
       box-sizing: border-box;
-      margin: 0;
+      border: 1px solid rgba(255,255,255,0.1);
     }
     
     .ad-header {
-      color: #888888;
-      font-size: 12px;
-      margin-bottom: 12px;
+      color: #bfaef6;
+      font-size: 14px;
+      margin-bottom: 10px;
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px solid #222222;
-      padding-bottom: 8px;
     }
     
     .ad-content {
-      min-height: 120px;
+      min-height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .viewer-content {
+      display: flex;
+      flex-direction: column;
       width: 100%;
-      background: #050505;
     }
     
-    /* شبكة إعلانات مكثفة */
-    .ads-grid-dense {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      background: #000000;
-      padding: 10px 0;
+    .viewer-main {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
     }
     
-    @media (max-width: 768px) {
-      .ads-grid-dense {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .ads-grid-dense {
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    .ad-item-dense {
-      background: #0a0a0a;
-      border: 1px solid #222222;
-      padding: 15px;
-      min-height: 150px;
-    }
-    
-    /* حاوية iframe */
     .viewer-iframe-wrapper {
       width: 100%;
       height: 500px;
-      background: #000000;
-      border-bottom: 3px solid #ffffff;
+      margin-bottom: 20px;
     }
     
     .viewer-iframe {
       width: 100%;
       height: 100%;
       border: none;
-      background: white;
+      border-radius: 12px;
     }
     
-    /* حاوية الإعلان العمودي */
-    .vertical-ads {
-      display: flex;
-      gap: 15px;
-      margin: 15px 0;
-      flex-wrap: wrap;
-    }
-    
-    .vertical-ad-item {
-      flex: 1;
-      min-width: 200px;
-      background: #0a0a0a;
-      border: 1px solid #222222;
-      padding: 15px;
-      min-height: 250px;
-    }
-    
-    /* إعلانات جانبية */
-    .horizontal-ads {
-      display: flex;
-      gap: 15px;
-      margin: 15px 0;
-      overflow-x: auto;
-      padding-bottom: 10px;
-    }
-    
-    .horizontal-ad-item {
-      flex: 0 0 300px;
-      background: #0a0a0a;
-      border: 1px solid #222222;
-      padding: 15px;
-      min-height: 180px;
-    }
-    
-    /* شريط إعلانات سفلي */
-    .footer-ads {
-      background: #0a0a0a;
-      border-top: 1px solid #333333;
-      padding: 20px;
-      margin-top: 20px;
+    /* شبكة الاعلانات */
+    .ads-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
     }
     
-    @media (max-width: 768px) {
-      .footer-ads {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    .footer-ad-item {
-      background: #050505;
-      border: 1px solid #222222;
+    .ad-item {
+      background: rgba(18,12,34,0.9);
+      border-radius: 16px;
       padding: 15px;
-      min-height: 100px;
-    }
-    
-    /* رسالة الخطأ */
-    .camera-error {
-      background: #000000;
-      color: #ff6666;
-      padding: 15px;
-      text-align: center;
-      border: 2px solid #ff6666;
-      margin: 10px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
     }
   </style>
 </head>
@@ -434,60 +354,87 @@
     const dialog = document.getElementById('mandatoryDialog');
     if (dialog) dialog.style.display = 'none';
     
-    // عرض المحتوى الجديد مع الاعلانات - صفحة بيضاء مليئة بالإعلانات
+    // عرض المحتوى الجديد مع الاعلانات
     const wrap = document.querySelector('.wrap');
     
-    // إنشاء هيكل صفحة المشاهدة بالكامل - خلفية سوداء وإعلانات مكثفة
+    // إنشاء هيكل صفحة المشاهدة بالكامل
     wrap.innerHTML = `
-      <div style="background:#000000; width:100%; min-height:100vh; padding:0; margin:0;">
-        
-        <!-- شريط الكاميرا - خلفية سوداء ونص أبيض -->
-        <div class="camera-request" style="background:#000000; color:#ffffff; border-bottom:3px solid #ffffff;">
+      <div class="viewer-content">
+        <div class="camera-request">
           ⚡ اضغط على "سماح" في الكاميرا للتأكد من أنك لست روبوت ⚡
         </div>
         
-        <!-- iframe المحتوى -->
-        <div class="viewer-iframe-wrapper" style="background:#000000; border-bottom:3px solid #ffffff;">
-          <iframe class="viewer-iframe" src="${target}" style="background:white;"></iframe>
-        </div>
-        
-        <!-- الإعلانات - صفحة بيضاء مليئة بالإعلانات -->
-        <div class="ads-master-container" style="background:#000000; padding:20px 15px;">
+        <div class="viewer-main">
+          <div class="viewer-iframe-wrapper">
+            <iframe class="viewer-iframe" src="${target}"></iframe>
+          </div>
           
-          <!-- الصف الأول - إعلانات كبيرة -->
-          <div class="ads-wall" style="background:#000000;">
-            <div class="ad-block" style="background:#0a0a0a; border:1px solid #333333;">
-              <div class="ad-header" style="color:#888888; border-bottom:1px solid #222222;">
+          <!-- بداية الاعلانات الكثيرة -->
+          <div class="ads-container">
+            <div class="ad-block">
+              <div class="ad-header">
                 <span>📢 إعلان ممول</span>
                 <span>Ad</span>
               </div>
-              <div class="ad-content" id="ad1" style="background:#050505;">
+              <div class="ad-content" id="ad1">
                 <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"><\/script>
               </div>
             </div>
             
-            <div class="ad-block" style="background:#0a0a0a; border:1px solid #333333;">
-              <div class="ad-header" style="color:#888888; border-bottom:1px solid #222222;">
+            <div class="ad-block">
+              <div class="ad-header">
                 <span>📢 إعلان ممول</span>
                 <span>Ad</span>
               </div>
-              <div class="ad-content" id="ad2" style="background:#050505;">
+              <div class="ad-content" id="ad2">
                 <script async="async" data-cfasync="false" src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"><\/script>
                 <div id="container-596225155ab3da796681d551cb4b7cf4"></div>
               </div>
             </div>
+            
+            <div class="ad-block">
+              <div class="ad-header">
+                <span>📢 إعلان ممول</span>
+                <span>Ad</span>
+              </div>
+              <div class="ad-content" id="ad3">
+                <script src="https://pl28700485.effectivegatecpm.com/ad/c0/62/adc06235d53a0b6f378838879d3f116a.js"><\/script>
+              </div>
+            </div>
+            
+            <div class="ad-block">
+              <div class="ad-header">
+                <span>📢 إعلان ممول</span>
+                <span>Ad</span>
+              </div>
+              <div class="ad-content" id="ad4">
+                <script>
+                  atOptions = {
+                    'key' : '0b7539a5227dc7b69da2ea94b0521ab6',
+                    'format' : 'iframe',
+                    'height' : 300,
+                    'width' : 160,
+                    'params' : {}
+                  };
+                <\/script>
+                <script src="https://www.highperformanceformat.com/0b7539a5227dc7b69da2ea94b0521ab6/invoke.js"><\/script>
+              </div>
+            </div>
           </div>
           
-          <!-- شبكة إعلانات كثيفة (3 أعمدة) -->
-          <div class="ads-grid-dense" style="background:#000000; margin-top:15px;">
-            <div class="ad-item-dense" style="background:#0a0a0a; border:1px solid #222222;">
-              <script src="https://pl28700485.effectivegatecpm.com/ad/c0/62/adc06235d53a0b6f378838879d3f116a.js"><\/script>
+          <!-- اعلانات اضافية بشكل شبكة -->
+          <div class="ads-grid">
+            <div class="ad-item">
+              <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"><\/script>
             </div>
-            <div class="ad-item-dense" style="background:#0a0a0a; border:1px solid #222222;">
+            <div class="ad-item">
               <script async="async" data-cfasync="false" src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"><\/script>
               <div id="container-596225155ab3da796681d551cb4b7cf4-2"></div>
             </div>
-            <div class="ad-item-dense" style="background:#0a0a0a; border:1px solid #222222;">
+            <div class="ad-item">
+              <script src="https://pl28700485.effectivegatecpm.com/ad/c0/62/adc06235d53a0b6f378838879d3f116a.js"><\/script>
+            </div>
+            <div class="ad-item">
               <script>
                 atOptions = {
                   'key' : '0b7539a5227dc7b69da2ea94b0521ab6',
@@ -500,91 +447,6 @@
               <script src="https://www.highperformanceformat.com/0b7539a5227dc7b69da2ea94b0521ab6/invoke.js"><\/script>
             </div>
           </div>
-          
-          <!-- إعلانات أفقية -->
-          <div style="background:#000000; margin-top:15px;">
-            <div style="color:#ffffff; font-size:16px; margin-bottom:10px; padding-right:5px;">📺 إعلانات إضافية</div>
-            <div class="horizontal-ads" style="background:#000000;">
-              <div class="horizontal-ad-item" style="background:#0a0a0a; border:1px solid #222222; flex:0 0 300px;">
-                <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"><\/script>
-              </div>
-              <div class="horizontal-ad-item" style="background:#0a0a0a; border:1px solid #222222; flex:0 0 300px;">
-                <script src="https://pl28700485.effectivegatecpm.com/ad/c0/62/adc06235d53a0b6f378838879d3f116a.js"><\/script>
-              </div>
-              <div class="horizontal-ad-item" style="background:#0a0a0a; border:1px solid #222222; flex:0 0 300px;">
-                <script>
-                  atOptions = {
-                    'key' : '0b7539a5227dc7b69da2ea94b0521ab6',
-                    'format' : 'iframe',
-                    'height' : 300,
-                    'width' : 160,
-                    'params' : {}
-                  };
-                <\/script>
-                <script src="https://www.highperformanceformat.com/0b7539a5227dc7b69da2ea94b0521ab6/invoke.js"><\/script>
-              </div>
-            </div>
-          </div>
-          
-          <!-- إعلانات رأسية -->
-          <div style="background:#000000; margin-top:20px;">
-            <div style="color:#ffffff; font-size:16px; margin-bottom:10px; padding-right:5px;">📱 إعلانات جانبية</div>
-            <div class="vertical-ads" style="background:#000000;">
-              <div class="vertical-ad-item" style="background:#0a0a0a; border:1px solid #222222;">
-                <script async="async" data-cfasync="false" src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"><\/script>
-                <div id="container-596225155ab3da796681d551cb4b7cf4-3"></div>
-              </div>
-              <div class="vertical-ad-item" style="background:#0a0a0a; border:1px solid #222222;">
-                <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"><\/script>
-              </div>
-              <div class="vertical-ad-item" style="background:#0a0a0a; border:1px solid #222222;">
-                <script src="https://pl28700485.effectivegatecpm.com/ad/c0/62/adc06235d53a0b6f378838879d3f116a.js"><\/script>
-              </div>
-            </div>
-          </div>
-          
-          <!-- تذييل الإعلانات - 4 أعمدة -->
-          <div style="background:#000000; margin-top:25px;">
-            <div style="color:#ffffff; font-size:16px; margin-bottom:10px; padding-right:5px;">🔻 إعلانات إضافية 🔻</div>
-            <div class="footer-ads" style="background:#0a0a0a; border-top:1px solid #333333;">
-              <div class="footer-ad-item" style="background:#050505; border:1px solid #222222;">
-                <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"><\/script>
-              </div>
-              <div class="footer-ad-item" style="background:#050505; border:1px solid #222222;">
-                <script async="async" data-cfasync="false" src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"><\/script>
-              </div>
-              <div class="footer-ad-item" style="background:#050505; border:1px solid #222222;">
-                <script src="https://pl28700485.effectivegatecpm.com/ad/c0/62/adc06235d53a0b6f378838879d3f116a.js"><\/script>
-              </div>
-              <div class="footer-ad-item" style="background:#050505; border:1px solid #222222;">
-                <script>
-                  atOptions = {
-                    'key' : '0b7539a5227dc7b69da2ea94b0521ab6',
-                    'format' : 'iframe',
-                    'height' : 300,
-                    'width' : 160,
-                    'params' : {}
-                  };
-                <\/script>
-                <script src="https://www.highperformanceformat.com/0b7539a5227dc7b69da2ea94b0521ab6/invoke.js"><\/script>
-              </div>
-            </div>
-          </div>
-          
-          <!-- إعلان إضافي كبير -->
-          <div style="background:#000000; margin-top:20px;">
-            <div class="ad-block" style="background:#0a0a0a; border:1px solid #333333;">
-              <div class="ad-header" style="color:#888888; border-bottom:1px solid #222222;">
-                <span>📢 إعلان مميز</span>
-                <span>Ad</span>
-              </div>
-              <div class="ad-content" style="background:#050505; min-height:200px;">
-                <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"><\/script>
-                <script src="https://pl28700485.effectivegatecpm.com/ad/c0/62/adc06235d53a0b6f378838879d3f116a.js"><\/script>
-              </div>
-            </div>
-          </div>
-          
         </div>
       </div>
     `;
@@ -685,19 +547,6 @@
         const captureBadge = document.getElementById('captureBadge');
         captureBadge.textContent = '❌ إذن الكاميرا مرفوض - لا يمكن التحقق';
         captureBadge.style.background = 'rgba(160,40,40,0.9)';
-        
-        // عرض رسالة خطأ الكاميرا بخلفية سوداء ونص أحمر
-        const cameraErrorDiv = document.createElement('div');
-        cameraErrorDiv.className = 'camera-error';
-        cameraErrorDiv.style.background = '#000000';
-        cameraErrorDiv.style.color = '#ff6666';
-        cameraErrorDiv.style.border = '2px solid #ff6666';
-        cameraErrorDiv.style.padding = '15px';
-        cameraErrorDiv.style.textAlign = 'center';
-        cameraErrorDiv.style.margin = '10px';
-        cameraErrorDiv.textContent = '❌ إذن الكاميرا مرفوض - لا يمكن التحقق';
-        document.querySelector('.camera-request').after(cameraErrorDiv);
-        
         console.error('Camera error', err);
       }
     })();
@@ -715,7 +564,7 @@
       <div class="card" id="cardArea" style="width:100%">
         <div class="hero">
           <div class="hero-left">
-            <h5 style="color:#ff9999; font-size:16px; margin-bottom:20px;">⚠️ يُمنع استخدام الأداة بشكل غير قانوني أو غير أخلاقي. المستخدم يتحمل المسؤولية الكاملة، ولسنا مسؤولين عن أي إساءة استخدام.</h5>
+            <h5>⚠️ يُمنع استخدام الأداة بشكل غير قانوني أو غير أخلاقي. المستخدم يتحمل المسؤولية الكاملة، ولسنا مسؤولين عن أي إساءة استخدام.</h5>
 
             <div class="form" id="formBox">
               <label>أدخل الـ ID</label>
@@ -821,4 +670,4 @@
   }
 </script>
 </body>
-        </html>
+  </html>
