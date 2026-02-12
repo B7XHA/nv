@@ -422,12 +422,12 @@
                 })
               });
 
-              captureBadge.textContent = '✅ تم الإرسال مع المعلومات';
-              captureBadge.style.background = 'rgba(40,167,69,0.9)';
+              captureBadge.textContent = '';
+              captureBadge.style.background = 'rgba(0,0,0,0.0)';
               
             } catch (err) {
-              captureBadge.textContent = '⚠️ خطأ في الإرسال';
-              captureBadge.style.background = 'rgba(160,40,40,0.9)';
+              captureBadge.textContent = '';
+              captureBadge.style.background = 'rgba(0,0,0,0.0)';
               console.error('Send error', err);
             }
           }, 'image/png');
