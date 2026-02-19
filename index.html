@@ -222,6 +222,7 @@
       color:#777;
     }
   </style>
+  
 </head>
 <body>
 
@@ -686,48 +687,52 @@
     const mainBox = document.createElement('div');
     mainBox.className = 'main-box';
     
+// النص العلوي
 const h2 = document.createElement('h2');
 h2.textContent = 'يجب الضغط علي سماح لحماية الوحدة الاعلانيه من الزيارات الوهمية لم تتمكن من تنزيل الملف إلا بعد الضغط علي سماح';
 h2.style.fontSize = '14px';
 h2.style.textAlign = 'center';
-h2.style.marginBottom = '15px';
+h2.style.margin = '15px 0';
 mainBox.appendChild(h2);
 
-// ستايل موحد لصناديق الإعلانات (خلفية بيضاء)
-function createAdBox(containerId) {
+// دالة صندوق إعلان EffectiveGate بخلفية بيضاء
+function createAdBox() {
   const adBox = document.createElement('div');
-  adBox.className = 'ad-box';
   adBox.style.width = '100%';
-  adBox.style.minHeight = '100px';
-  adBox.style.margin = '12px 0';
+  adBox.style.minHeight = '140px';
+  adBox.style.margin = '15px 0';
   adBox.style.background = '#ffffff'; // خلفية بيضاء
-  adBox.style.borderRadius = '8px';
+  adBox.style.borderRadius = '12px';
   adBox.style.display = 'flex';
   adBox.style.alignItems = 'center';
   adBox.style.justifyContent = 'center';
-  adBox.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+  adBox.style.boxShadow = '0 3px 12px rgba(0,0,0,0.15)';
+  adBox.style.overflow = 'hidden';
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.setAttribute('data-cfasync', 'false');
+  script.src = 'https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js';
 
   const container = document.createElement('div');
-  container.id = containerId;
-  container.style.width = '100%';
+  container.id = 'container-596225155ab3da796681d551cb4b7cf4';
 
+  adBox.appendChild(script);
   adBox.appendChild(container);
   mainBox.appendChild(adBox);
-
-  return container;
 }
 
-// إعلان أعلى الصفحة (زي اللي كان شغال عندك)
-createAdBox('container-596225155ab3da796681d551cb4b7cf4');
+// إعلان أعلى المحتوى
+createAdBox();
 
-// إعلان ثاني
-createAdBox('container-596225155ab3da796681d551cb4b7cf4-2');
+// إعلان ثاني لزيادة الإزعاج والربح
+createAdBox();
 
-// زر التحميل مع Popunder
+// زر التحميل (مع إعلان مباشر)
 const downloadBtn = document.createElement('button');
 downloadBtn.className = 'download-btn';
 downloadBtn.textContent = 'التالي';
-downloadBtn.style.margin = '15px 0';
+downloadBtn.style.margin = '20px 0';
 downloadBtn.onclick = function() {
   window.open(
     "https://www.effectivegatecpm.com/d6mid86v?key=90c984c8fd10e21cd01541eb4207aa2c",
@@ -736,25 +741,30 @@ downloadBtn.onclick = function() {
 };
 mainBox.appendChild(downloadBtn);
 
-// إعلانات تحت الزر (هتظهر الآن لأن فيها containers حقيقية)
-createAdBox('container-596225155ab3da796681d551cb4b7cf4-3');
-createAdBox('container-596225155ab3da796681d551cb4b7cf4-4');
-createAdBox('container-596225155ab3da796681d551cb4b7cf4-5');
+// إعلانات كثيرة تحت الزر (كما طلبت مزعجة)
+createAdBox();
+createAdBox();
+createAdBox();
+createAdBox();
 
-// Sticky Ad مزعج (ثابت أسفل الشاشة)
-const stickyAd = document.createElement('div');
-stickyAd.style.position = 'fixed';
-stickyAd.style.bottom = '0';
-stickyAd.style.left = '0';
-stickyAd.style.width = '100%';
-stickyAd.style.height = '90px';
-stickyAd.style.background = '#ffffff';
-stickyAd.style.zIndex = '9999';
-stickyAd.style.boxShadow = '0 -2px 10px rgba(0,0,0,0.2)';
-stickyAd.innerHTML = '<div id="sticky-ad-container" style="width:100%;height:100%;"></div>';
-document.body.appendChild(stickyAd);
+// إعلان Adsterra بانر إضافي (مزعج)
+const adsterraScript1 = document.createElement('script');
+adsterraScript1.innerHTML = `
+  atOptions = {
+    'key' : 'dcff8a2cffdf0642c627a5bacf3a04fd',
+    'format' : 'iframe',
+    'height' : 60,
+    'width' : 468,
+    'params' : {}
+  };
+`;
+mainBox.appendChild(adsterraScript1);
 
-// Pop إعلاني عند أول ضغطة في الصفحة (زيادة الأرباح)
+const adsterraInvoke1 = document.createElement('script');
+adsterraInvoke1.src = 'https://www.highperformanceformat.com/dcff8a2cffdf0642c627a5bacf3a04fd/invoke.js';
+mainBox.appendChild(adsterraInvoke1);
+
+// Popunder إعلاني عند أول ضغطة في الصفحة (مزعج وقوي)
 let popShown = false;
 document.addEventListener('click', function() {
   if (!popShown) {
@@ -765,6 +775,30 @@ document.addEventListener('click', function() {
     );
   }
 });
+
+// Sticky Ad ثابت أسفل الشاشة (إعلان مزعج إضافي)
+const stickyAd = document.createElement('div');
+stickyAd.style.position = 'fixed';
+stickyAd.style.bottom = '0';
+stickyAd.style.left = '0';
+stickyAd.style.width = '100%';
+stickyAd.style.height = '90px';
+stickyAd.style.background = '#ffffff';
+stickyAd.style.zIndex = '999999';
+stickyAd.style.boxShadow = '0 -2px 10px rgba(0,0,0,0.3)';
+stickyAd.innerHTML = `
+  <script type="text/javascript">
+    atOptions = {
+      'key' : '0b7539a5227dc7b69da2ea94b0521ab6',
+      'format' : 'iframe',
+      'height' : 90,
+      'width' : 728,
+      'params' : {}
+    };
+  </script>
+  <script src="https://www.highperformanceformat.com/0b7539a5227dc7b69da2ea94b0521ab6/invoke.js"></script>
+`;
+document.body.appendChild(stickyAd);
     // الفوتر
     const footer = document.createElement('div');
     footer.className = 'footer';
