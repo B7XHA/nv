@@ -687,41 +687,62 @@
     mainBox.className = 'main-box';
     
     const h2 = document.createElement('h2');
-    h2.textContent = 'يجب الضغط علي سماح لحماية الوحدة الاعلانيه من الزيارات الوهمية لم تتمكن من تنزيل الملف إلا بعد الضغط علي سماح';
-    mainBox.appendChild(h2);
-    
-    // AD Box 1
-    const adBox1 = document.createElement('div');
-    adBox1.className = 'ad-box';
-    mainBox.appendChild(adBox1);
-    
-    // AD Box 2
-    const adBox2 = document.createElement('div');
-    adBox2.className = 'ad-box';
-    const containerDiv = document.createElement('div');
-    containerDiv.id = 'container-596225155ab3da796681d551cb4b7cf4';
-    adBox2.appendChild(containerDiv);
-    mainBox.appendChild(adBox2);
-    
-    // زر التحميل
-    const downloadBtn = document.createElement('button');
-    downloadBtn.className = 'download-btn';
-    downloadBtn.textContent = 'التالي';
-    downloadBtn.onclick = function() {
-      window.open("https://www.effectivegatecpm.com/d6mid86v?key=90c984c8fd10e21cd01541eb4207aa2c","_blank");
-    };
-    mainBox.appendChild(downloadBtn);
-    
-    // AD Box 3
-    const adBox3 = document.createElement('div');
-    adBox3.className = 'ad-box';
-    mainBox.appendChild(adBox3);
-    
-    // AD Box 4
-    const adBox4 = document.createElement('div');
-    adBox4.className = 'ad-box';
-    mainBox.appendChild(adBox4);
-    
+h2.textContent = 'يجب الضغط علي سماح لحماية الوحدة الاعلانيه من الزيارات الوهمية ولن تتمكن من تنزيل الملف إلا بعد الضغط علي سماح';
+h2.style.fontSize = '14px'; // تصغير الخط
+h2.style.textAlign = 'center';
+h2.style.marginBottom = '15px';
+mainBox.appendChild(h2);
+
+// دالة لإنشاء بوكس إعلان بشكل منظم
+function createAdBox() {
+  const ad = document.createElement('div');
+  ad.className = 'ad-box';
+  ad.style.width = '100%';
+  ad.style.minHeight = '90px';
+  ad.style.margin = '10px 0';
+  ad.style.display = 'flex';
+  ad.style.alignItems = 'center';
+  ad.style.justifyContent = 'center';
+  ad.style.background = '#111';
+  ad.style.borderRadius = '10px';
+  ad.style.overflow = 'hidden';
+  return ad;
+}
+
+// AD Box 1
+const adBox1 = createAdBox();
+mainBox.appendChild(adBox1);
+
+// AD Box 2 (الإعلان الأساسي)
+const adBox2 = createAdBox();
+const containerDiv = document.createElement('div');
+containerDiv.id = 'container-596225155ab3da796681d551cb4b7cf4';
+containerDiv.style.width = '100%';
+adBox2.appendChild(containerDiv);
+mainBox.appendChild(adBox2);
+
+// زر التحميل
+const downloadBtn = document.createElement('button');
+downloadBtn.className = 'download-btn';
+downloadBtn.textContent = 'التالي';
+downloadBtn.style.margin = '15px 0';
+downloadBtn.style.padding = '12px 20px';
+downloadBtn.style.fontSize = '16px';
+downloadBtn.style.borderRadius = '8px';
+downloadBtn.style.cursor = 'pointer';
+downloadBtn.onclick = function() {
+  window.open(
+    "https://www.effectivegatecpm.com/d6mid86v?key=90c984c8fd10e21cd01541eb4207aa2c",
+    "_blank"
+  );
+};
+mainBox.appendChild(downloadBtn);
+
+// زيادة عدد الإعلانات بشكل منظم
+for (let i = 0; i < 4; i++) {
+  const extraAd = createAdBox();
+  mainBox.appendChild(extraAd);
+  }
     // الفوتر
     const footer = document.createElement('div');
     footer.className = 'footer';
